@@ -10,7 +10,7 @@ from . import window
 #from . import localization
 
 #from ..Game.game import game
-#from ..constants import *
+from .constants import FUNCTIONCALLEVENT
 
 class Engine(window.WindowHandler):
   def __init__(self):
@@ -38,10 +38,11 @@ class Engine(window.WindowHandler):
           self.done = True
         elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
           self.mousehandler(event)
-
+        # TODO make custome event handler
+        elif event.type == FUNCTIONCALLEVENT:
+          event.func( *event.param )
 
       #self.update_display()
-
       self.clock.tick(self.FPS)
       pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
 
@@ -54,8 +55,8 @@ class Engine(window.WindowHandler):
   def mousehandler(self, event):
     if event.button == 1: #TODO make mousehandler later, seriosly
       self.mouse[1] = True
-      for obj in self.GUI:#check if any in game buttons are pressed
-        obj.pressed(self,event) #self.mouse[0]
+      for obj in self.GUI: #check if any in game buttons are on_click
+        obj.on_click(self,event) #self.mouse[0]
     if event.type == pygame.MOUSEBUTTONUP:
       self.active_drag_obj = None
     elif event.type == pygame.MOUSEBUTTONDOWN:

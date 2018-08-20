@@ -22,7 +22,7 @@ class WindowHandler():
 
     def asf():
       print("jeubueu")
-    self.GUI = [Button(self.surf_GUI, (0.2,0.1), (.1,0.1), "tesets", [ONETIME,asf] ) ]
+    self.GUI = [Button(self.surf_GUI, (0.2,0.1), (.1,0.1), "tesets", [FUNCTIONCALLEVENT, asf] ) ]
     self.refresh_GUI()
     self.MainWindow.blit(self.surf_GUI, self.gamepos )
     pygame.display.flip()

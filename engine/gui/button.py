@@ -68,8 +68,7 @@ class Button (Widget):  #Menu Button
     self.draw()
     self.blit()
 
-  def pressed(self, PROGRAM, event):
-    print(":DD")
+  def on_click(self, PROGRAM, event):
     if self.c_rect.collidepoint(event.pos):
       if event.type == pygame.MOUSEBUTTONUP:
         #self.debug()

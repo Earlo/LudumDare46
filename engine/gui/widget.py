@@ -1,4 +1,5 @@
 import pygame
+from ..constants import FUNCTIONCALLEVENT
 
 class Widget(object): #Contains all stuff common with all widegests
   def __init__(self):
@@ -62,12 +63,9 @@ class Widget(object): #Contains all stuff common with all widegests
     return int(w * pw)
 
   def send_fucntion_request(self, func):
-    stype = func.pop(0)
+    CALLTYPE = func.pop(0)
     f = func.pop(0)
-    if stype == ONETIME:
-        signal = pygame.event.Event(function_call_event, {"func":f,"param":func})
-    elif stype == MAINCHA:
-        pass
+    signal = pygame.event.Event(CALLTYPE, {"func":f,"param":func})
     pygame.event.post(signal)
 
   def debug(self):

@@ -26,10 +26,9 @@ LETTER_INPUT_HELD_DOWN_DELAY    = 100
 LETTER_INPUT_HELD_DOWN_INTERWAL = 20
 INPUT_BOX_ACTIVITY_INDICATOR = "|"
 
-update_screen_event = pygame.USEREVENT + 1
-function_call_event = pygame.USEREVENT + 2
-MAINCHA = 0
-ONETIME = 1
+SCREENUPDATEEVENT = pygame.USEREVENT + 1
+FUNCTIONCALLEVENT = pygame.USEREVENT + 2
+UPDATEONTICKEVENT = pygame.USEREVENT + 3
 
 def nothing():
     #print ("nothing") #:D

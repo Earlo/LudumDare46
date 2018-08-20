@@ -1,11 +1,8 @@
+import os
+import pygame
 import __main__
 
-import os
-
-import pygame
-
-
-#BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
+BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
 
 
 LANGUAGE = "english"
@@ -16,13 +13,13 @@ LANGUAGE = "english"
 #640*896 ?
 GWIDTH = 640
 GHEIGTH = 896
-SWIDTH =  GWIDTH + 20
+SWIDTH = GWIDTH + 20
 SHEIGTH = GHEIGTH + 20
 
 FONT = "Calibri" #I know. Will change later
 
 #millisecnds
-LETTER_INPUT_HELD_DOWN_DELAY    = 100
+LETTER_INPUT_HELD_DOWN_DELAY = 100
 LETTER_INPUT_HELD_DOWN_INTERWAL = 20
 INPUT_BOX_ACTIVITY_INDICATOR = "|"
 
@@ -31,7 +28,4 @@ FUNCTIONCALLEVENT = pygame.USEREVENT + 2
 UPDATEONTICKEVENT = pygame.USEREVENT + 3
 
 def nothing():
-    #print ("nothing") #:D
-    pass
-
-
+  pass

@@ -11,7 +11,7 @@ class WindowHandler():
     self.w = SWIDTH
     self.h = SHEIGTH
     self.create_surfaces()
-    self.gamepos = (10,10)
+    self.gamepos = (10, 10)
 
     self.GHandle = graphicalAssetHandler.graphicalAssetHandler()
     self.needs_resize = False
@@ -22,21 +22,21 @@ class WindowHandler():
 
     def asf():
       print("jeubueu")
-    self.GUI = [Button(self.surf_GUI, (0.2,0.1), (.1,0.1), "tesets", [FUNCTIONCALLEVENT, asf] ) ]
+    self.GUI = [Button(self.surf_GUI, (0.2, 0.1), (.1, 0.1), "tesets", [FUNCTIONCALLEVENT, asf])]
     self.refresh_GUI()
-    self.MainWindow.blit(self.surf_GUI, self.gamepos )
+    self.MainWindow.blit(self.surf_GUI, self.gamepos)
     pygame.display.flip()
 
     #from ..Gui import screens
-    #self.load_GUI( screens.SMainMenu )
+    #self.load_GUI(screens.SMainMenu)
 
   def create_surfaces(self): #TODO reconsider this
 
-    self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.HWSURFACE | pygame.DOUBLEBUF )
+    self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.HWSURFACE | pygame.DOUBLEBUF)
 
-    self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE )
+    self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
 
-    self.surf_GUI.set_colorkey((0,0,0))
+    self.surf_GUI.set_colorkey((0, 0, 0))
 
   def refresh_GUI(self):
     for wid in self.GUI:
@@ -44,20 +44,20 @@ class WindowHandler():
       wid.blit()
 
   def reset_GUI(self):
-    self.surf_GUI = pygame.Surface((self.w, self.h) ) #reset gui
-    self.surf_GUI.set_colorkey((0,0,0))
+    self.surf_GUI = pygame.Surface((self.w, self.h)) #reset gui
+    self.surf_GUI.set_colorkey((0, 0, 0))
 
     self.GUI = []
     self.active_text_field = None
 
-  def load_GUI(self,GUI):
+  def load_GUI(self, GUI):
     self.reset_GUI()
 
     GUI(self)
     self.GUI_template = GUI
 
     self.refresh_GUI()
-    self.MainWindow.blit(self.surf_GUI, self.gamepos )
+    self.MainWindow.blit(self.surf_GUI, self.gamepos)
     pygame.display.flip()
 
   def adjust_GUI(self):
@@ -87,9 +87,9 @@ class WindowHandler():
     upd = []
     for depth in self.updates:
         for change in self.updates[depth]:
-            s,r = change
-            self.MainWindow.blit( s,r,r)
-            #self.MainWindow.blit(s,r)
+            s, r = change
+            self.MainWindow.blit(s, r, r)
+            #self.MainWindow.blit(s, r)
             upd.append(r)
         self.updates[depth] = []
     if not upd == [] and not flip:
@@ -101,21 +101,21 @@ class WindowHandler():
 
 
   def drawloop(self):
-    while( not self.done ):
+    while(not self.done):
       self.drawGame()
 
   def drawGame(self):
 
-    self.surf_GAME.blit( self.GAME.AREA.surf(), (0, self.GAME.AREA.scroll) )
+    self.surf_GAME.blit(self.GAME.AREA.surf(), (0, self.GAME.AREA.scroll))
     if (not self.GAME.AREA.oldsprite == ""):
-      self.surf_GAME.blit( self.GAME.AREA.oldsurf(), (0, self.GAME.AREA.oldscroll) )
+      self.surf_GAME.blit(self.GAME.AREA.oldsurf(), (0, self.GAME.AREA.oldscroll))
 
     for e in self.GAME.effects:
-      self.surf_GAME.blit( e.CURRENTSURFACE, e )
+      self.surf_GAME.blit(e.CURRENTSURFACE, e)
     for u in self.GAME.units:
-      self.surf_GAME.blit( u.CURRENTSURFACE, u )
+      self.surf_GAME.blit(u.CURRENTSURFACE, u)
     for a in self.GAME.ammo:
-      self.surf_GAME.blit( a.CURRENTSURFACE, a )
+      self.surf_GAME.blit(a.CURRENTSURFACE, a)
 
-    self.MainWindow.blit(self.surf_GAME, self.gamepos, self.GAME.AREA )
-    self.MainWindow.blit(self.surf_EFFECT, self.gamepos, self.GAME.AREA )
+    self.MainWindow.blit(self.surf_GAME, self.gamepos, self.GAME.AREA)
+    self.MainWindow.blit(self.surf_EFFECT, self.gamepos, self.GAME.AREA)

@@ -1,8 +1,3 @@
-
-import sys
-import os
-import time
-
 import pygame
 from pygame.locals import *
 
@@ -18,7 +13,7 @@ class Engine(window.WindowHandler):
 
     self.FPS = 60 #silky smooth 60 frames per second
 
-    self.mouse = [pygame.mouse.get_pos() , False ,  [0,0] , None ]
+    self.mouse = [pygame.mouse.get_pos(), False, [0, 0], None]
     self.clock = pygame.time.Clock()
     self.additional_tasks = []
     self.done = False
@@ -40,7 +35,7 @@ class Engine(window.WindowHandler):
           self.mousehandler(event)
         # TODO make custome event handler
         elif event.type == FUNCTIONCALLEVENT:
-          event.func( *event.param )
+          event.func(*event.param)
 
       #self.update_display()
       self.clock.tick(self.FPS)
@@ -56,7 +51,7 @@ class Engine(window.WindowHandler):
     if event.button == 1: #TODO make mousehandler later, seriosly
       self.mouse[1] = True
       for obj in self.GUI: #check if any in game buttons are on_click
-        obj.on_click(self,event) #self.mouse[0]
+        obj.on_click(self, event) #self.mouse[0]
     if event.type == pygame.MOUSEBUTTONUP:
       self.active_drag_obj = None
     elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -69,8 +64,8 @@ class Engine(window.WindowHandler):
     self.GAME.game_step()
     self.drawGame()
 
-  def OTfunction_wrapper(self,e):
-    e.func( *e.param )
+  def OTfunction_wrapper(self, e):
+    e.func(*e.param)
 
 
 def start():

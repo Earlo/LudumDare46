@@ -45,14 +45,14 @@ class Widget(object): #Contains all stuff common with all widegests
       else:
         area.move_ip(self.relative_position())
       #if self.parent == None: #send event to main screen handle
-      #    events.blit_request(area,self.parent_surf)   #edit later
-        #events.blit_request(self.c_rect,self.parent_surf) #for debugging
+      #    events.blit_request(area, self.parent_surf)   #edit later
+        #events.blit_request(self.c_rect, self.parent_surf) #for debugging
       #else: #send message forward to parent
-      #    self.parent.blit(  area = area )
+      #    self.parent.blit( area = area)
 
   def relative_cordinate(self, parent, w, h): #returs point relative to scree size
     pw, ph = parent.get_size()
-    return[ int(w * pw), int(h * ph) ]
+    return[int(w * pw), int(h * ph)]
 
   def RelativeHeight(self, parent, h):
     ph = parent.get_height()
@@ -65,8 +65,8 @@ class Widget(object): #Contains all stuff common with all widegests
   def send_fucntion_request(self, func):
     CALLTYPE = func.pop(0)
     f = func.pop(0)
-    signal = pygame.event.Event(CALLTYPE, {"func":f,"param":func})
+    signal = pygame.event.Event(CALLTYPE, {"func":f, "param":func})
     pygame.event.post(signal)
 
   def debug(self):
-    print ("values for this widget",self,"are:\n",self.pos,"\n",self.rect,"\n",self.c_rect)
+    print ("values for this widget", self, "are:\n", self.pos, "\n", self.rect, "\n", self.c_rect)

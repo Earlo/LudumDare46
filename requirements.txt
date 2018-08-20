@@ -1,2 +1,2 @@
-pygame==1.9.3
-pylint==1.9.2
+pygame==1.9.4
+pylint==2.1.1

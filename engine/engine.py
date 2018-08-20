@@ -1,15 +1,14 @@
 import pygame
-from pygame.locals import *
 
-from . import window
+from . import guiHandler
 #from . import localization
 
 #from ..Game.game import game
 from .constants import FUNCTIONCALLEVENT
 
-class Engine(window.WindowHandler):
+class Engine(guiHandler.GuiHandler):
   def __init__(self):
-    super().__init__() #initialize window handler
+    super().__init__()
 
     self.FPS = 60 #silky smooth 60 frames per second
 
@@ -17,8 +16,6 @@ class Engine(window.WindowHandler):
     self.clock = pygame.time.Clock()
     self.additional_tasks = []
     self.done = False
-    self.active_text_field = None
-    self.active_drag_obj = None
 
     self.GAME = None
 

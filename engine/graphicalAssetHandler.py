@@ -5,7 +5,7 @@ import __main__
 BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
 fpath = os.path.join(BASEPATH, "Assets")
 
-class graphicalAssetHandler(dict):
+class GraphicalAssetHandler(dict):
   def __init__(self):
     super().__init__()
 

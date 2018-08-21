@@ -2,9 +2,9 @@ import pygame
 
 from . import guiHandler
 #from . import localization
-
-#from ..Game.game import game
 from .constants import FUNCTIONCALLEVENT
+
+from game.main import Game
 
 class Engine(guiHandler.GuiHandler):
   FPS = 60 #silky smooth 60 frames per second
@@ -53,16 +53,15 @@ class Engine(guiHandler.GuiHandler):
   def call_one_time_function(self, e):
     e.func(*e.param)
 
-
+  # TODO move these
   def STARTGAME(self):
-    self.GAME = game(self)
+    self.GAME = Game(self)
     self.reset_GUI()
+    self.function = self.game_loop
 
-    self.function = self.geamloap
-
-  def geamloap(self):
-    self.GAME.game_step()
-    self.drawGame()
+  def game_loop(self):
+    self.GAME.tick()
+    self.draw_game()
 
 
 

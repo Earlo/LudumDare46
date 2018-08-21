@@ -9,7 +9,7 @@ class WindowHandler:
     self.w = SWIDTH
     self.h = SHEIGTH
     self.create_surfaces()
-    self.gamepos = (10, 10)
+    self.gamepos = (0, 0)
 
     self.GHandle = graphicalAssetHandler.GraphicalAssetHandler()
     self.needs_resize = False
@@ -19,8 +19,6 @@ class WindowHandler:
 
   def create_surfaces(self): #TODO reconsider this
     self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.HWSURFACE | pygame.DOUBLEBUF)
-    self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
-    self.surf_GUI.set_colorkey((0, 0, 0))
 
   def update_resolution(self):
     self.create_surfaces()
@@ -55,7 +53,7 @@ class WindowHandler:
 
     pygame.display.flip()
 
-  def drawGame(self):
+  def draw_game(self):
 
     self.surf_GAME.blit(self.GAME.AREA.surf(), (0, self.GAME.AREA.scroll))
     if not self.GAME.AREA.oldsprite == "":

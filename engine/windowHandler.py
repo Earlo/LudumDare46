@@ -24,7 +24,6 @@ class WindowHandler:
 
   def update_resolution(self):
     self.create_surfaces()
-    self.adjust_GUI()
 
   def rezise_request(self, event):
     self.needs_resize = True
@@ -56,17 +55,11 @@ class WindowHandler:
 
     pygame.display.flip()
 
-
-  def drawloop(self):
-    while(not self.done):
-      self.drawGame()
-
   def drawGame(self):
 
     self.surf_GAME.blit(self.GAME.AREA.surf(), (0, self.GAME.AREA.scroll))
-    if (not self.GAME.AREA.oldsprite == ""):
+    if not self.GAME.AREA.oldsprite == "":
       self.surf_GAME.blit(self.GAME.AREA.oldsurf(), (0, self.GAME.AREA.oldscroll))
-
     for e in self.GAME.effects:
       self.surf_GAME.blit(e.CURRENTSURFACE, e)
     for u in self.GAME.units:

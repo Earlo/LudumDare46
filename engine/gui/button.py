@@ -6,8 +6,8 @@ from .widget import Widget
 from ..constants import FONT
 
 
-class Button (Widget):  #Menu Button
-  def __init__(self, parent_surf, rsurf, rpos, text, func, colour = [200, 20, 25]):
+class Button(Widget):  #Menu Button
+  def __init__(self, parent_surf, rsurf, rpos, text, func, colour=[200, 20, 25]):
     super().__init__()
     self.rsurf = rsurf
     self.rpos = rpos
@@ -20,7 +20,7 @@ class Button (Widget):  #Menu Button
     self.cb_colour = [colour[0]/2, colour[1]/2, colour[2]/2]
     self.b_colour = [colour[0]/4, colour[1]/4, colour[2]/4]
 
-  def adjust(self, p_surf, parent = None):
+  def adjust(self, p_surf, parent=None):
     self.adjust_p(p_surf, parent)
     self.adjust_r()
 
@@ -68,7 +68,7 @@ class Button (Widget):  #Menu Button
     self.draw()
     self.blit()
 
-  def on_click(self, PROGRAM, event):
+  def on_click(self, event):
     if self.c_rect.collidepoint(event.pos):
       if event.type == pygame.MOUSEBUTTONUP:
         #self.debug()

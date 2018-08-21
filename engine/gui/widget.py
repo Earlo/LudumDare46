@@ -1,21 +1,20 @@
 import pygame
-from ..constants import FUNCTIONCALLEVENT
 
 class Widget: #Contains all stuff common with all widegests
   def __init__(self):
     self.parent = None
 
-  def adjust_p(self, p_surf, parent = None): #adjust parents
-    if not p_surf == None:
+  def adjust_p(self, p_surf, parent=None): #adjust parents
+    if not p_surf is None:
       self.parent_surf = p_surf
-    if not parent == None:
+    if not parent is None:
       self.parent = parent
 
   def adjust_r(self):
     self.surf = pygame.Surface((self.relative_cordinate(self.parent_surf, *self.rsurf)))
     self.rect = self.surf.get_rect()
     self.pos = self.relative_cordinate(self.parent_surf, *self.rpos)
-    if not self.parent == None:
+    if not self.parent is None:
       self.c_rect = self.rect.copy()
       self.c_rect.topleft = [x + y for x, y in zip(self.pos, self.parent.absolute_position())]
     else:
@@ -28,10 +27,10 @@ class Widget: #Contains all stuff common with all widegests
   def relative_position(self):
     return self.pos
 
-  def blit(self, update = True, surf = None, area = None):
-    if surf == None:
+  def blit(self, update=True, surf=None, area=None):
+    if surf is None:
       surf = self.surf
-    if not area == None:
+    if not area is None:
       pos = [x + y for x, y in zip(self.relative_position(), area.topleft)]
     else:
       pos = self.relative_position()
@@ -39,12 +38,12 @@ class Widget: #Contains all stuff common with all widegests
     self.parent_surf.blit(surf, pos, area) #draw self on parent surface
 
     if update:
-      if area == None:
+      if area is None:
         area = self.rect.copy()
         area.topleft = pos
       else:
         area.move_ip(self.relative_position())
-      #if self.parent == None: #send event to main screen handle
+      #if self.parent is None: #send event to main screen handle
       #    events.blit_request(area, self.parent_surf)   #edit later
         #events.blit_request(self.c_rect, self.parent_surf) #for debugging
       #else: #send message forward to parent
@@ -69,4 +68,4 @@ class Widget: #Contains all stuff common with all widegests
     pygame.event.post(signal)
 
   def debug(self):
-    print ("values for this widget", self, "are:\n", self.pos, "\n", self.rect, "\n", self.c_rect)
+    print("values for this widget", self, "are:\n", self.pos, "\n", self.rect, "\n", self.c_rect)

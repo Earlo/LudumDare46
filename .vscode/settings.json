@@ -1,3 +1,4 @@
 {
-  "python.pythonPath": "/Users/visapollari/VirtuaEnvs/Pygame/bin/python"
+  "python.pythonPath": "/Users/visapollari/VirtuaEnvs/Pygame/bin/python",
+  "python.linting.enabled": true
 }

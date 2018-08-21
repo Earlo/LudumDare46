@@ -23,6 +23,10 @@ class GuiHandler(windowHandler.WindowHandler):
     #from ..Gui import screens
     #self.load_GUI(screens.SMainMenu)
 
+  def update_resolution(self):
+    super().update_resolution()
+    self.adjust_GUI()
+
   def refresh_GUI(self):
     for wid in self.GUI:
       wid.draw()

@@ -2,38 +2,26 @@ import os
 import pygame
 import __main__
 
-BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
-fpath = os.path.join(BASEPATH, "Assets")
-
 class GraphicalAssetHandler(dict):
+  BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
+  asset_path = os.path.join(BASEPATH, "Assets")
   def __init__(self):
     super().__init__()
 
-    self["SPRITE"] = dict()
-    self["PORTRAIT"] = dict()
-    self["BGR"] = dict()
+    self.load("SPRITES", colorkey_pos=(0, 0), flags=[pygame.RLEACCEL])
+    self.load("PORTRAIT", colorkey_pos=(0, 0))
+    self.load("BGR")
 
-    for root, dirs, files in os.walk(os.path.join(fpath, "sprites")):
+  def load(self, end_path, colorkey_pos=(-1, -1), flags=[]):
+    self[end_path] = dict()
+    path_to_folder = os.path.join(self.asset_path, end_path)
+    for root, dirs, files in os.walk(path_to_folder):
       for file in files:
         if file.endswith(".png"):
-          name = file.split(os.path.sep)[-1].split(".")[0]
-          i = pygame.image.load(os.path.join(fpath, "sprites", file)).convert()
-          i.set_colorkey(i.get_at((0, 0)), pygame.RLEACCEL)
-          self["SPRITE"][name] = i
+          file_path = os.path.join(path_to_folder, file)
+          base_name = file.split(os.path.sep)[-1].split(".")[0]
 
-      for root, dirs, files in os.walk(os.path.join(fpath, "portraits")):
-        for file in files:
-          if file.endswith(".png"):
-            path = os.path.join(fpath, "portraits", file)
-            name = file.split(os.path.sep)[-1].split(".")[0]
-            i = pygame.image.load(path).convert()
-            i.set_colorkey(i.get_at((0, 0)))
-            self["PORTRAIT"][name] = i
+          img = pygame.image.load(file_path).convert()
+          img.set_colorkey(img.get_at(colorkey_pos), *flags)
 
-      for root, dirs, files in os.walk(os.path.join(fpath, "bgr")):
-        for file in files:
-          if file.endswith(".png"):
-            path = os.path.join(fpath, "bgr", file)
-            name = file.split(os.path.sep)[-1].split(".")[0]
-            i = pygame.image.load(path).convert()
-            self["BGR"][name] = i
+          self[end_path][base_name] = img

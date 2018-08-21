@@ -1,10 +1,10 @@
 import pygame
+from game.main import Game
 
 from . import guiHandler
 #from . import localization
 from .constants import FUNCTIONCALLEVENT
 
-from game.main import Game
 
 class Engine(guiHandler.GuiHandler):
   FPS = 60 #silky smooth 60 frames per second

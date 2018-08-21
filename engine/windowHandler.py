@@ -4,7 +4,7 @@ from . import graphicalAssetHandler
 from .constants import SWIDTH, SHEIGTH
 
 
-class WindowHandler():
+class WindowHandler:
   def __init__(self):
     self.w = SWIDTH
     self.h = SHEIGTH

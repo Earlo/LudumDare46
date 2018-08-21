@@ -1,7 +1,7 @@
 import pygame
 from ..constants import FUNCTIONCALLEVENT
 
-class Widget(object): #Contains all stuff common with all widegests
+class Widget: #Contains all stuff common with all widegests
   def __init__(self):
     self.parent = None
 

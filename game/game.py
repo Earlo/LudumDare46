@@ -3,7 +3,10 @@ class Game():
     self.ENGINE = ENGINE
     self.pos = [0, 0]
 
+    self.entities = []
+
     print("geimu starttooo")
 
   def tick(self):
-    pass
+    for e in self.entities:
+      e.tick()

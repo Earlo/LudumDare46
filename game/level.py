@@ -16,7 +16,7 @@ class Level(pygame.Rect):
   # TODO make the getter setter thing
   def sprite(self):
      # TODO Pass only strings to Engine
-     return self.GAME.ENGINE.graphical_asset_handler["BGR"][self._sprite]
+     return self.GAME.ENGINE.graphical_asset_handler["bgr"][self._sprite]
 
   # TODO move
   # TODO this method blits, doesn't draw

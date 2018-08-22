@@ -39,11 +39,8 @@ class Engine(WindowHandler):
       self.on_tick_action()
       self.update_display()
 
-      self.clock.tick()
-      try:
-        pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
-      except OverflowError:
-        pass
+      self.clock.tick(self.FPS)
+      pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
 
   def mousehandler(self, event):
     # TODO make mousehandler
@@ -85,11 +82,11 @@ def start():
 
 
 def load_assets():
-  PROGRAM.graphical_asset_handler.load("SPRITES",
+  PROGRAM.graphical_asset_handler.load("sprites",
                                        colorkey_pos=(0, 0),
                                        flags=[pygame.RLEACCEL])
 
-  PROGRAM.graphical_asset_handler.load("PORTRAIT",
+  PROGRAM.graphical_asset_handler.load("portrat",
                                        colorkey_pos=(0, 0))
 
-  PROGRAM.graphical_asset_handler.load("BGR")
+  PROGRAM.graphical_asset_handler.load("bgr")

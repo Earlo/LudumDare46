@@ -1,7 +1,7 @@
 import pygame
 
 
-class Widget: # Contains all stuff common with all widegests
+class Widget:
   def __init__(self):
     self.parent = None
 

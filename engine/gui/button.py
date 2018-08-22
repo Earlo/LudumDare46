@@ -17,14 +17,14 @@ class Button(Widget):  # Menu Button
     self.func = func
     self.colour = colour
     self.i_colour = self.colour[:]
-    self.cb_colour = [colour[0]/2, colour[1]/2, colour[2]/2]
-    self.b_colour = [colour[0]/4, colour[1]/4, colour[2]/4]
+    self.cb_colour = [colour[0] / 2, colour[1] / 2, colour[2] / 2]
+    self.b_colour = [colour[0] / 4, colour[1] / 4, colour[2] / 4]
 
   def adjust(self, p_surf, parent=None):
     self.adjust_p(p_surf, parent)
     self.adjust_r()
 
-    font_size = int(self.rect.width/len(self.text))+5
+    font_size = int(self.rect.width / len(self.text)) + 5
     if font_size > self.rect.height:
       font_size = self.rect.height
     self.font = pygame.font.SysFont(FONT, font_size)
@@ -59,7 +59,7 @@ class Button(Widget):  # Menu Button
 
     # pygame.draw.rect(self.surf, self.d_colour, self.rect, 3)
 
-    self.surf.blit(self.label, ((self.rect.width/2) - self.label.get_width()/2, (self.rect.height/2) - self.label.get_height()/2))
+    self.surf.blit(self.label, ((self.rect.width / 2) - self.label.get_width() / 2, (self.rect.height / 2) - self.label.get_height() / 2))
 
   def change_colours(self):
     c = self.i_colour[:]

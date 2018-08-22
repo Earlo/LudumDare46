@@ -38,7 +38,8 @@ class Engine(guiHandler.GuiHandler):
       pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
 
   def mousehandler(self, event):
-    if event.button == 1: # TODO make mousehandler later, seriosly
+    # TODO make mousehandler
+    if event.button == 1:
       self.mouse[1] = True
       for obj in self.GUI:
         # self.mouse[0]

@@ -3,7 +3,7 @@ from game.game import Game
 
 from .windowHandler import WindowHandler
 # from . import localization
-from .constants import FUNCTIONCALLEVENT
+from .constants import FUNCTIONCALLEVENT, nothing
 
 
 class Engine(WindowHandler):
@@ -12,12 +12,12 @@ class Engine(WindowHandler):
 
   def __init__(self):
     super().__init__()
+    self.done = False
+    self.clock = pygame.time.Clock()
+    self.on_tick_action = nothing
 
     # TODO mouse object
     self.mouse = [pygame.mouse.get_pos(), False, [0, 0], None]
-    self.clock = pygame.time.Clock()
-    self.additional_tasks = []
-    self.done = False
 
     # TODO remove
     self.test_gui()
@@ -36,6 +36,7 @@ class Engine(WindowHandler):
         elif event.type == FUNCTIONCALLEVENT:
           self.call_one_time_function(event)
 
+      self.on_tick_action()
       # self.update_display()
       self.clock.tick(self.FPS)
       pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
@@ -61,9 +62,9 @@ class Engine(WindowHandler):
   def STARTGAME(self):
     self.GAME = Game(self)
     self.reset_GUI()
-    self.function = self.game_loop
+    self.on_tick_action = self.game_tick
 
-  def game_loop(self):
+  def game_tick(self):
     self.GAME.tick()
     self.draw_game()
 

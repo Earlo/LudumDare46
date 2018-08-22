@@ -46,10 +46,8 @@ class WindowHandler(GuiHandler):
 
   def draw_game(self):
 
-    self.surf_GAME.blit(self.GAME.AREA.surf(), (0, 0))
-
     # TODO refactor
-    for e in self.GAME.entities:
-      self.surf_GAME.blit(e.CURRENTSURFACE, e)
+    # for e in self.GAME.entities:
+    #   self.surf_GAME.blit(e.CURRENTSURFACE, e)
 
-    self.window.blit(self.surf_GAME, self.gamepos, self.GAME.AREA)
+    self.window.blit(self.surf_GUI, self.gui_pos, self.gui_area)

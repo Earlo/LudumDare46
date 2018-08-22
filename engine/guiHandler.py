@@ -15,6 +15,8 @@ class GuiHandler(BaseSurfaceHandler):
     self.active_drag_obj = None
 
     self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
+    self.gui_pos = (0, 0)
+    self.gui_area = pygame.Rect(0, 0, self.w, self.h)
 
     # from ..Gui import screens
     # self.load_GUI(screens.SMainMenu)

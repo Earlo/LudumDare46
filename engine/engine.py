@@ -2,8 +2,8 @@ import pygame
 from game.game import Game
 
 from .window.windowHandler import WindowHandler
-# from . import localization
 from .constants import FUNCTIONCALLEVENT, nothing
+# TODO localization system
 
 
 class Engine(WindowHandler):
@@ -39,15 +39,17 @@ class Engine(WindowHandler):
       self.on_tick_action()
       self.update_display()
 
-      self.clock.tick(self.FPS)
-      pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
+      self.clock.tick()
+      try:
+        pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
+      except OverflowError:
+        pass
 
   def mousehandler(self, event):
     # TODO make mousehandler
     if event.button == 1:
       self.mouse[1] = True
       for obj in self.GUI:
-        # self.mouse[0]
         obj.on_click(event)
     if event.type == pygame.MOUSEBUTTONUP:
       self.active_drag_obj = None
@@ -67,7 +69,6 @@ class Engine(WindowHandler):
 
   def game_tick(self):
     self.GAME.tick()
-    self.draw_game()
 
 
 def start():

@@ -5,11 +5,13 @@ import itertools
 # TODO refactor
 class Level(pygame.Rect):
   sprites = []
+  bgr_depth = 0
 
   def __init__(self, GAME):
     self.GAME = GAME
+    # TODO is tile, not sprite
     self._sprite = self.sprites[0]
-    super().__init__((0, 0), (1000, 500))
+    super().__init__((0, 0), (760, 500))
 
   # TODO make the getter setter thing
   def sprite(self):
@@ -17,6 +19,7 @@ class Level(pygame.Rect):
      return self.GAME.ENGINE.graphical_asset_handler["BGR"][self._sprite]
 
   # TODO move
+  # TODO this method blits, doesn't draw
   def draw(self):
     tile_w, tile_h = self.sprite().get_width(), self.sprite().get_height()
 
@@ -24,8 +27,11 @@ class Level(pygame.Rect):
                                   range(0, self.h + 1, tile_h)):
       self.GAME.ENGINE.surf_BGR.blit(self.sprite(), (x, y), self)
 
+    self.GAME.ENGINE.updates[self.bgr_depth].append((self.GAME.ENGINE.surf_BGR, self))
+
   def tick(self):
     # TODO Move to draw in engine side
+    # TODO Only call when needed
     self.draw()
 
 

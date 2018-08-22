@@ -1,4 +1,5 @@
 import pygame
+from collections import defaultdict
 
 from .guiHandler import GuiHandler
 from .bgrHandler import BgrHandler
@@ -15,7 +16,8 @@ class WindowHandler(GuiHandler, BgrHandler):
     self.needs_resize = False
     self.last_resie_request = 0
 
-    self.updates = {}
+    self.updates = defaultdict(list)
+    self.flip = False
 
   def rezise_request(self, event):
     self.needs_resize = True
@@ -23,29 +25,32 @@ class WindowHandler(GuiHandler, BgrHandler):
     super().rezise_request(event)
 
   def update_display(self):
-    """flip = False
     if self.needs_resize:
-        if pygame.time.get_ticks() - self.last_resie_request > 50:
-            self.update_resolution()
-            self.needs_resize = False
-            flip = True
+      if pygame.time.get_ticks() - self.last_resie_request > 50:
+        self.update_resolution()
+        self.needs_resize = False
+        self.flip = True
+
+    update_rects = self.blit_updates()
+
+    if self.flip:
+      pygame.display.flip()
+    elif update_rects:
+      pygame.display.update(update_rects)
+
+    # pygame.display.flip()
+  def blit_updates(self):
     sorted(self.updates)
-    upd = []
+    update_rects = []
     for depth in self.updates:
-        for change in self.updates[depth]:
-            s, r = change
-            self.window.blit(s, r, r)
-            # self.window.blit(s, r)
-            upd.append(r)
-        self.updates[depth] = []
-    if not upd == [] and not flip:
-        pygame.display.update(upd)
-    elif flip:
-        pygame.display.flip()"""
+      for change in self.updates[depth]:
+        surface, rect = change
+        self.window.blit(surface, rect, rect)
+        update_rects.append(rect)
+      self.updates[depth] = []
+    return update_rects
 
-    pygame.display.flip()
-
-  def draw_game(self):
+  def blit_everything(self):
 
     # TODO refactor
     # for e in self.GAME.entities:

@@ -1,9 +1,10 @@
 import pygame
 
 from .guiHandler import GuiHandler
+from .bgrHandler import BgrHandler
 
 
-class WindowHandler(GuiHandler):
+class WindowHandler(GuiHandler, BgrHandler):
   def __init__(self):
 
     super().__init__()
@@ -50,4 +51,7 @@ class WindowHandler(GuiHandler):
     # for e in self.GAME.entities:
     #   self.surf_GAME.blit(e.CURRENTSURFACE, e)
 
+    # TODO no
     self.window.blit(self.surf_GUI, self.gui_pos, self.gui_area)
+    self.window.blit(self.surf_BGR, self.bgr_pos, self.bgr_area)
+    pygame.display.flip()

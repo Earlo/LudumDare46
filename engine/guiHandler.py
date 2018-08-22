@@ -55,8 +55,9 @@ class GuiHandler(BaseSurfaceHandler):
     self.refresh_GUI()
     self.blit_GUI()
 
+  # TODO, less copypasta
   def blit_GUI(self):
-    self.window.blit(self.surf_GUI, (0, 0))
+    self.window.blit(self.surf_GUI, self.gui_pos, self.gui_area)
     pygame.display.flip()
 
   def adjust_GUI(self):

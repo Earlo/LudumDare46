@@ -2,6 +2,7 @@
 from .level import ExampleLevel
 
 
+# should it inherit engine? Maybe?
 class Game():
   def __init__(self, ENGINE):
     self.ENGINE = ENGINE

@@ -12,10 +12,12 @@ class Level(pygame.Rect):
 
   # TODO make the getter setter thing
   def sprite(self):
-     return self.GAME.GHandle["BGR"][self._sprite]
+     # TODO Pass only strings to Engine
+     return self.GAME.ENGINE.graphical_asset_handler["BGR"][self._sprite]
 
   def tick(self):
-    pass
+    # TODO Move to draw in engine side
+    self.GAME.ENGINE.surf_BGR.blit(self.sprite(), (0, 0), self)
 
 
 class ExampleLevel(Level):

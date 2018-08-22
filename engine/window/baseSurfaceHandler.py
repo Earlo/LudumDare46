@@ -1,8 +1,8 @@
 import pygame
 
-from .graphicalAssetHandler import GraphicalAssetHandler
+from ..graphicalAssetHandler import GraphicalAssetHandler
 
-from .constants import SWIDTH, SHEIGTH
+from ..constants import SWIDTH, SHEIGTH
 
 
 class BaseSurfaceHandler:

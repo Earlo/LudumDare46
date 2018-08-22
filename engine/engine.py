@@ -1,7 +1,7 @@
 import pygame
 from game.game import Game
 
-from .windowHandler import WindowHandler
+from .window.windowHandler import WindowHandler
 # from . import localization
 from .constants import FUNCTIONCALLEVENT, nothing
 

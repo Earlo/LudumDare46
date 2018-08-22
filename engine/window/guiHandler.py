@@ -1,8 +1,8 @@
 import pygame
 
 from .baseSurfaceHandler import BaseSurfaceHandler
-from .constants import FUNCTIONCALLEVENT
-from .gui.button import Button
+from ..constants import FUNCTIONCALLEVENT
+from ..gui.button import Button
 
 
 class GuiHandler(BaseSurfaceHandler):

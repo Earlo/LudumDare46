@@ -10,10 +10,6 @@ class GraphicalAssetHandler(dict):
   def __init__(self):
     super().__init__()
 
-    self.load("SPRITES", colorkey_pos=(0, 0), flags=[pygame.RLEACCEL])
-    self.load("PORTRAIT", colorkey_pos=(0, 0))
-    self.load("BGR")
-
   def load(self, end_path, colorkey_pos=False, flags=[]):
     self[end_path] = dict()
     path_to_folder = os.path.join(self.asset_path, end_path)

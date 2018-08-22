@@ -1,12 +1,12 @@
 import pygame
-from game.main import Game
+from game.game import Game
 
-from . import guiHandler
+from .windowHandler import WindowHandler
 # from . import localization
 from .constants import FUNCTIONCALLEVENT
 
 
-class Engine(guiHandler.GuiHandler):
+class Engine(WindowHandler):
   FPS = 60
   GAME = None
 
@@ -18,6 +18,9 @@ class Engine(guiHandler.GuiHandler):
     self.clock = pygame.time.Clock()
     self.additional_tasks = []
     self.done = False
+
+    # TODO remove
+    self.test_gui()
 
   def run(self):
     while not self.done:
@@ -70,6 +73,20 @@ def start():
   pygame.display.init()
   pygame.font.init()
 
+  global PROGRAM
   PROGRAM = Engine()
+  load_assets()
+
   PROGRAM.run()
   pygame.quit()
+
+
+def load_assets():
+  PROGRAM.graphical_asset_handler.load("SPRITES",
+                                       colorkey_pos=(0, 0),
+                                       flags=[pygame.RLEACCEL])
+
+  PROGRAM.graphical_asset_handler.load("PORTRAIT",
+                                       colorkey_pos=(0, 0))
+
+  PROGRAM.graphical_asset_handler.load("BGR")

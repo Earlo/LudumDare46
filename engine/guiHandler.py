@@ -1,11 +1,11 @@
 import pygame
-from . import windowHandler
 
+from .baseSurfaceHandler import BaseSurfaceHandler
 from .constants import FUNCTIONCALLEVENT
 from .gui.button import Button
 
 
-class GuiHandler(windowHandler.WindowHandler):
+class GuiHandler(BaseSurfaceHandler):
 
   def __init__(self):
     super().__init__()
@@ -16,14 +16,15 @@ class GuiHandler(windowHandler.WindowHandler):
 
     self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
 
-    # # TODO move
-    self.GUI = [Button(self.surf_GUI, (0.2, 0.1), (.1, 0.1), "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
-    self.refresh_GUI()
-    self.MainWindow.blit(self.surf_GUI, self.gamepos)
-    pygame.display.flip()
-
     # from ..Gui import screens
     # self.load_GUI(screens.SMainMenu)
+  # TODO remove
+  def test_gui(self):
+    self.GUI = [Button(self.surf_GUI,
+                       (0.2, 0.1), (.1, 0.1),
+                       "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
+    self.refresh_GUI()
+    self.blit_GUI()
 
   def update_resolution(self):
     super().update_resolution()
@@ -53,7 +54,7 @@ class GuiHandler(windowHandler.WindowHandler):
     self.blit_GUI()
 
   def blit_GUI(self):
-    self.MainWindow.blit(self.surf_GUI, self.gamepos)
+    self.window.blit(self.surf_GUI, (0, 0))
     pygame.display.flip()
 
   def adjust_GUI(self):

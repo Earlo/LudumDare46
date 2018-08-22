@@ -1,25 +1,24 @@
 import pygame
 
-from .guiHandler import GuiHandler
+from .graphicalAssetHandler import GraphicalAssetHandler
+
+from .constants import SWIDTH, SHEIGTH
 
 
-class WindowHandler(GuiHandler):
+class BaseSurfaceHandler:
   def __init__(self):
-
     super().__init__()
-    self.window = pygame.display.set_mode((self.w, self.h),
-                                          pygame.HWSURFACE |
-                                          pygame.DOUBLEBUF)
 
-    self.needs_resize = False
-    self.last_resie_request = 0
+    self.w = SWIDTH
+    self.h = SHEIGTH
+
+    self.graphical_asset_handler = GraphicalAssetHandler()
 
     self.updates = {}
 
   def rezise_request(self, event):
-    self.needs_resize = True
-    self.last_resie_request = pygame.time.get_ticks()
-    super().rezise_request(event)
+    self.w = event.w
+    self.h = event.h
 
   def update_display(self):
     """flip = False
@@ -43,13 +42,3 @@ class WindowHandler(GuiHandler):
         pygame.display.flip()"""
 
     pygame.display.flip()
-
-  def draw_game(self):
-
-    self.surf_GAME.blit(self.GAME.AREA.surf(), (0, 0))
-
-    # TODO refactor
-    for e in self.GAME.entities:
-      self.surf_GAME.blit(e.CURRENTSURFACE, e)
-
-    self.window.blit(self.surf_GAME, self.gamepos, self.GAME.AREA)

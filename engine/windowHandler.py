@@ -17,7 +17,8 @@ class WindowHandler:
 
     self.updates = {}
 
-  def create_surfaces(self): #TODO reconsider this
+  def create_surfaces(self):
+    # TODO reconsider this
     self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.HWSURFACE | pygame.DOUBLEBUF)
 
   def update_resolution(self):
@@ -43,7 +44,7 @@ class WindowHandler:
         for change in self.updates[depth]:
             s, r = change
             self.MainWindow.blit(s, r, r)
-            #self.MainWindow.blit(s, r)
+            # self.MainWindow.blit(s, r)
             upd.append(r)
         self.updates[depth] = []
     if not upd == [] and not flip:

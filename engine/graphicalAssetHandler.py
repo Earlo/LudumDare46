@@ -2,9 +2,11 @@ import os
 import pygame
 import __main__
 
+
 class GraphicalAssetHandler(dict):
   BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
   asset_path = os.path.join(BASEPATH, "Assets")
+
   def __init__(self):
     super().__init__()
 

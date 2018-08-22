@@ -5,8 +5,6 @@ from .constants import FUNCTIONCALLEVENT
 from .gui.button import Button
 
 
-from .constants import SWIDTH, SHEIGTH
-
 class GuiHandler(windowHandler.WindowHandler):
 
   def __init__(self):
@@ -18,14 +16,14 @@ class GuiHandler(windowHandler.WindowHandler):
 
     self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
 
-    ## TODO move
+    # # TODO move
     self.GUI = [Button(self.surf_GUI, (0.2, 0.1), (.1, 0.1), "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
     self.refresh_GUI()
     self.MainWindow.blit(self.surf_GUI, self.gamepos)
     pygame.display.flip()
 
-    #from ..Gui import screens
-    #self.load_GUI(screens.SMainMenu)
+    # from ..Gui import screens
+    # self.load_GUI(screens.SMainMenu)
 
   def update_resolution(self):
     super().update_resolution()
@@ -47,7 +45,7 @@ class GuiHandler(windowHandler.WindowHandler):
   def load_GUI(self, GUI):
     self.reset_GUI()
 
-    #TODO GUI(self) is shit
+    # TODO GUI(self) is shit
     GUI(self)
     self.GUI_template = GUI
 

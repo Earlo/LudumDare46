@@ -37,7 +37,8 @@ class Engine(WindowHandler):
           self.call_one_time_function(event)
 
       self.on_tick_action()
-      # self.update_display()
+      self.update_display()
+
       self.clock.tick(self.FPS)
       pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
 

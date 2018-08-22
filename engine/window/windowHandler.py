@@ -54,4 +54,3 @@ class WindowHandler(GuiHandler, BgrHandler):
     # TODO no
     self.window.blit(self.surf_GUI, self.gui_pos, self.gui_area)
     self.window.blit(self.surf_BGR, self.bgr_pos, self.bgr_area)
-    pygame.display.flip()

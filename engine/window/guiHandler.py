@@ -15,7 +15,6 @@ class GuiHandler(BaseSurfaceHandler):
     self.active_drag_obj = None
 
     self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
-    self.gui_pos = (0, 0)
     self.gui_area = pygame.Rect(0, 0, self.w, self.h)
 
     # from ..Gui import screens
@@ -57,7 +56,7 @@ class GuiHandler(BaseSurfaceHandler):
 
   # TODO, less copypasta
   def blit_GUI(self):
-    self.window.blit(self.surf_GUI, self.gui_pos, self.gui_area)
+    self.window.blit(self.surf_GUI, self.gui_area, self.gui_area)
     pygame.display.flip()
 
   def adjust_GUI(self):

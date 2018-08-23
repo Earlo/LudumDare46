@@ -3,6 +3,7 @@ from collections import defaultdict
 
 from .guiHandler import GuiHandler
 from .bgrHandler import BgrHandler
+from .gameCamera import GameCamera
 
 
 class WindowHandler(GuiHandler, BgrHandler):
@@ -15,6 +16,8 @@ class WindowHandler(GuiHandler, BgrHandler):
 
     self.needs_resize = False
     self.last_resie_request = 0
+
+    self.camera = GameCamera(self.w, self.h)
 
     self.updates = defaultdict(list)
     self.flip = False
@@ -45,7 +48,7 @@ class WindowHandler(GuiHandler, BgrHandler):
     for depth in self.updates:
       for change in self.updates[depth]:
         surface, rect = change
-        self.window.blit(surface, rect, rect)
+        self.window.blit(surface, rect.move(self.camera.topleft), rect)
         update_rects.append(rect)
       self.updates[depth] = []
     return update_rects
@@ -57,5 +60,5 @@ class WindowHandler(GuiHandler, BgrHandler):
     #   self.surf_GAME.blit(e.CURRENTSURFACE, e)
 
     # TODO no
-    self.window.blit(self.surf_GUI, self.gui_pos, self.gui_area)
-    self.window.blit(self.surf_BGR, self.bgr_pos, self.bgr_area)
+    self.window.blit(self.surf_GUI, self.camera, self.gui_area)
+    self.window.blit(self.surf_BGR, self.camera, self.bgr_area)

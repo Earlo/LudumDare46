@@ -66,6 +66,8 @@ class Engine(WindowHandler):
 
   def game_tick(self):
     self.GAME.tick()
+    # DEBUG
+    self.camera.debug_move()
 
 
 def start():

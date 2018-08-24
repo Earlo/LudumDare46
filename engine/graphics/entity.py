@@ -11,13 +11,13 @@ class Entity(Sprite):
     self.GAME = GAME
 
     self.created_at = time
-    self.updated_at = self.firstMoment
+    self.updated_at = self.created_at
     self.timeInterval = 0
     self.center = pos
     self.float_pos = pos
 
-  # TODO make property
-  def getAge(self):
+  @property
+  def age(self):
     return self.updated_at - self.created_at
 
   def update(self, t):

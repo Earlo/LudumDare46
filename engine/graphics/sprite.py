@@ -1,5 +1,7 @@
 import pygame
 
+#TODO DESIGN should inherit Rect or Surface?
+
 
 class Sprite(pygame.Rect):
   # example
@@ -17,6 +19,12 @@ class Sprite(pygame.Rect):
 
   def change_sprite(self, sprite_type, sprite):
     self.surf = self.GAME.ENGINE.graphical_asset_handler[sprite_type][sprite]
+
+  # TODO this method blits, doesn't draw
+  # TODO the updated surface should be configurable, now it defaults to entity behaviour
+  # Handle bgr cases and such
+  def draw(self):
+    self.GAME.ENGINE.updates[self.bgr_depth].append((self.surf, self))
 
   @property
   def sprite(self):

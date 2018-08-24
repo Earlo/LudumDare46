@@ -47,8 +47,8 @@ class WindowHandler(GuiHandler, BgrHandler):
     update_rects = []
     for depth in self.updates:
       for change in self.updates[depth]:
-        surface, rect = change
-        self.window.blit(surface, rect.move(self.camera.topleft), rect)
+        sprite, rect = change
+        self.window.blit(sprite, rect.move(self.camera.topleft), rect)
         update_rects.append(rect)
       self.updates[depth] = []
     return update_rects

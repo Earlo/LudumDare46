@@ -12,11 +12,6 @@ class Level(Sprite):
     self.GAME = GAME
     super().__init__(GAME, "bgr")
 
-  # TODO move
-  # TODO this method blits, doesn't draw
-  def draw(self):
-    self.GAME.ENGINE.updates[self.bgr_depth].append((self.surf, self))
-
   def tick(self):
     # TODO Move to draw in engine side
     # TODO Only call when needed

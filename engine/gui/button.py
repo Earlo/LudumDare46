@@ -71,7 +71,7 @@ class Button(Widget):  # Menu Button
   def on_click(self, event):
     if self.c_rect.collidepoint(event.pos):
       if event.type == pygame.MOUSEBUTTONUP:
-        # self.debug()
+        # print(self)
         self.down = True
         self.change_colours()
         self.send_fucntion_request(self.func[:])

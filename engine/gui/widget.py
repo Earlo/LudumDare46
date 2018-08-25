@@ -1,5 +1,7 @@
 import pygame
 
+# TODO maybe inherit surface
+
 
 class Widget:
   def __init__(self):

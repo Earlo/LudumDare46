@@ -1,6 +1,8 @@
 import pygame
 
-#TODO DESIGN should inherit Rect or Surface?
+# TODO DESIGN should inherit Rect or Surface?
+
+# RECT is unique for everyone, SPRITE isn't
 
 
 class Sprite(pygame.Rect):
@@ -46,4 +48,6 @@ class Sprite(pygame.Rect):
   def drawable_rect(self):
     return self.GAME.ENGINE.camera.clip(self)
 
-  # TODO add dunders
+  def __repr__(self):
+    return "Sprite {0} {1} at {2} ".format(self.sprite_type, self.sprite, self)
+

@@ -24,7 +24,7 @@ class ExampleLevel(Level):
   def __init__(self, GAME):
     super().__init__(GAME)
     # Example of repeating background
-    bgr = pygame.Surface([self.w * 3, self.h * 3])
+    bgr = pygame.Surface([self.w * 3, self.h * 3], pygame.HWSURFACE)
     for x, y in itertools.product(range(0, bgr.get_width(), self.w),
                                   range(0, bgr.get_height(), self.h)):
       bgr.blit(self.surf, (x, y), self)

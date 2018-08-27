@@ -5,7 +5,6 @@ from ..constants import SWIDTH, SHEIGTH
 class BaseSurfaceHandler:
   def __init__(self):
     super().__init__()
-
     self.w = SWIDTH
     self.h = SHEIGTH
 

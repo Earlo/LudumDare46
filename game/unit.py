@@ -8,8 +8,8 @@ class Unit(Entity):
   graphic_layer = 1
 
   def __init__(self, GAME):
-    super().__init__(GAME, (0.0, 0.0))
+    super().__init__(GAME, (100.0, 100.0))
 
   def tick(self):
-    self.move_ip(1, 1)
-    self.draw()
+    # Should most likely use tick
+    super().real_time_tick()

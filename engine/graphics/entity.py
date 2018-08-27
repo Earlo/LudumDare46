@@ -11,15 +11,17 @@ class Entity(Sprite):
     self.updated_at = self.created_at
     self.timeInterval = 0
 
+  def tick(self, t):
+    self.timeInterval = t - self.updated_at
+    self.updated_at = t
+    self.move_ip(1, 1)
+    self.draw()
+
+  def real_time_tick(self):
+    Entity.tick(self, pygame.time.get_ticks())
+
+  # TODO add dunders
+
   @property
   def age(self):
     return self.updated_at - self.created_at
-
-  def update(self, t):
-    self.timeInterval = t - self.lastUpdated
-    self.lastUpdated = t
-
-  def update_real_time(self):
-    self.update(pygame.time.get_ticks())
-
-  # TODO add dunders

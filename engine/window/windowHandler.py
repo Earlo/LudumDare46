@@ -41,16 +41,30 @@ class WindowHandler(GuiHandler, BgrHandler):
     elif update_rects:
       pygame.display.update(update_rects)
 
-    # pygame.display.flip()
   def blit_updates(self):
+    update_rects = self.erase()
     sorted(self.updates)
-    update_rects = []
+
+    cam_x = self.camera.x
+    cam_y = self.camera.y
     for depth in self.updates:
       for change in self.updates[depth]:
         sprite, rect = change
-        self.window.blit(sprite, rect.move(self.camera.topleft))
+        self.window.blit(sprite, rect.move(cam_x, cam_y))
         update_rects.append(rect)
+        self.updates[-1].append(rect)
       self.updates[depth] = []
+    return update_rects
+
+  def erase(self):
+    update_rects = []
+    cam_x = self.camera.previous.x
+    cam_y = self.camera.previous.y
+    for rect in self.updates[-1]:
+      pos = rect.move(cam_x, cam_y)
+      self.window.blit(self.surf_BGR, pos, pos)
+      update_rects.append(rect)
+    self.updates[-1] = []
     return update_rects
 
   def blit_everything(self):

@@ -7,7 +7,7 @@ import pygame
 class Sprite(pygame.Rect):
   # example
   sprites = ["frog"]
-  bgr_depth = 0
+  graphic_layer = 0
 
   def __init__(self, GAME, sprite_type):
     self.GAME = GAME
@@ -27,7 +27,7 @@ class Sprite(pygame.Rect):
   # now it defaults to entity behaviour
   # Handle bgr cases and such
   def draw(self):
-    self.GAME.ENGINE.updates[self.bgr_depth].append((self.surf, self))
+    self.GAME.ENGINE.updates[self.graphic_layer].append((self.surf, self.drawable_rect()))
 
   @property
   def sprite(self):

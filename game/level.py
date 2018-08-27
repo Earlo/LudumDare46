@@ -3,7 +3,6 @@
 
 
 class Level:
-  bgr_depth = 0
 
   def __init__(self, GAME):
     self.GAME = GAME

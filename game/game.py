@@ -1,5 +1,6 @@
 from engine.metaGame import MetaGame
 from .level import ExampleLevel
+from .unit import Unit
 
 
 # should it inherit engine? Maybe?
@@ -8,7 +9,7 @@ class Game(MetaGame):
     super().__init__(ENGINE)
 
     self.pos = [0, 0]
-    self.entities = []
+    self.entities = [Unit(self)]
     self.level = ExampleLevel(self)
 
   def tick(self):

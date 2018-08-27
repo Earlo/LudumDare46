@@ -4,17 +4,12 @@ from .sprite import Sprite
 
 
 class Entity(Sprite):
-  def __init__(self, GAME, pos, time):
-    self.change_sprite_to(0)
+  def __init__(self, GAME, pos, time=pygame.time.get_ticks()):
     super().__init__(GAME, "sprites")
-
-    self.GAME = GAME
-
+    self.topleft = pos
     self.created_at = time
     self.updated_at = self.created_at
     self.timeInterval = 0
-    self.center = pos
-    self.float_pos = pos
 
   @property
   def age(self):

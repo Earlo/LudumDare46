@@ -84,11 +84,12 @@ def start():
 
 
 def load_assets():
-  PROGRAM.graphical_asset_handler.load("sprites",
+  # TODO replace folder names with constants
+  PROGRAM.graphical_asset_handler.load('sprites',
                                        colorkey_pos=(0, 0),
                                        flags=[pygame.RLEACCEL])
 
-  PROGRAM.graphical_asset_handler.load("portrat",
+  PROGRAM.graphical_asset_handler.load('portrat',
                                        colorkey_pos=(0, 0))
 
-  PROGRAM.graphical_asset_handler.load("bgr")
+  PROGRAM.graphical_asset_handler.load('bgr')

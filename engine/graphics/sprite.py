@@ -7,12 +7,13 @@ import pygame
 class Sprite(pygame.Rect):
   # example
   sprites = ["frog"]
+  bgr_depth = 0
 
   def __init__(self, GAME, sprite_type):
+    self.GAME = GAME
     self.sprite_type = sprite_type
     self.change_sprite_to(0)
     super().__init__((0, 0), self._surf.get_size())
-    self.GAME = GAME
 
   def change_sprite_to(self, i):
     self.sprite = self.sprites[i]
@@ -22,7 +23,8 @@ class Sprite(pygame.Rect):
     self.surf = self.GAME.ENGINE.graphical_asset_handler[sprite_type][sprite]
 
   # TODO this method blits, doesn't draw
-  # TODO the updated surface should be configurable, now it defaults to entity behaviour
+  # TODO the updated surface should be configurable,
+  # now it defaults to entity behaviour
   # Handle bgr cases and such
   def draw(self):
     self.GAME.ENGINE.updates[self.bgr_depth].append((self.surf, self))

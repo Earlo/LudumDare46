@@ -12,7 +12,10 @@ class GameCamera(pygame.Rect):
   def move_camera(self, x, y):
     self.previous = self.copy()
     super().move_ip(x, y)
-    self.ENGINE.blit_BGR()
+    # TODO clean this up
+    self.x = max((self.x, 0))
+    self.y = max((self.y, 0))
+    self.ENGINE.blit_background()
 
   def debug_move(self):
     self.movement_direction += 0.05

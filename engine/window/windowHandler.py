@@ -68,7 +68,7 @@ class WindowHandler(GuiHandler, BgrHandler):
     cam_y = -self.camera.previous.y
     for rect in self.to_erase:
       pos = rect.move(cam_x, cam_y)
-      self.window.blit(self.surf_BGR, pos, rect)
+      self.window.blit(self.bgr_surf, pos, rect)
       update_rects.append(rect)
     self.to_erase = []
     return update_rects
@@ -81,4 +81,4 @@ class WindowHandler(GuiHandler, BgrHandler):
 
     # TODO no
     self.window.blit(self.surf_GUI, self.camera, self.gui_area)
-    self.window.blit(self.surf_BGR, self.camera, self.bgr_area)
+    self.window.blit(self.bgr_surf, self.camera, self.bgr_area)

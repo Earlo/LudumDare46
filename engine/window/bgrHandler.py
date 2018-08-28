@@ -10,6 +10,7 @@ class BgrHandler(BaseSurfaceHandler):
   def __init__(self):
     super().__init__()
     self.surf_BGR = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
+    self.rect = self.surf_BGR.get_rect()
     self._background_tile = "checker_dark"
 
   @property
@@ -31,8 +32,7 @@ class BgrHandler(BaseSurfaceHandler):
     self.surf_BGR = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
 
   def blit_BGR(self):
-    self.window.blit(self.surf_BGR, (0, 0))
-    pygame.display.flip()
+    self.force_erase(self.rect)
 
   def update_resolution(self):
     super().update_resolution()

@@ -10,8 +10,6 @@ class BaseSurfaceHandler:
 
     self.graphical_asset_handler = GraphicalAssetHandler()
 
-    self.updates = {}
-
   def rezise_request(self, event):
     self.w = event.w
     self.h = event.h

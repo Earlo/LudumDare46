@@ -3,14 +3,16 @@ import pygame
 
 
 class GameCamera(pygame.Rect):
-  def __init__(self, w, h):
+  def __init__(self, ENGINE, w, h):
     super().__init__(0, 0, w, h)
+    self.ENGINE = ENGINE
     self.movement_direction = 0
     self.previous = self.copy()
 
   def move_camera(self, x, y):
     self.previous = self.copy()
     super().move_ip(x, y)
+    self.ENGINE.blit_BGR()
 
   def debug_move(self):
     self.movement_direction += 0.05

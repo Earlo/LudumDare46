@@ -65,6 +65,7 @@ class Engine(WindowHandler):
     self.on_tick_action = self.game_tick
 
   def game_tick(self):
+    self.window.fill((0, 0, 255))
     self.GAME.tick()
     # DEBUG
     self.camera.debug_move()

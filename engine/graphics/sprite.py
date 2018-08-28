@@ -23,7 +23,7 @@ class Sprite(pygame.Rect):
     self.surf = self.GAME.ENGINE.graphical_asset_handler[sprite_type][sprite]
 
   def draw(self):
-    self.GAME.ENGINE.draw(self.graphic_layer, self.surf, self.drawable_rect())
+    self.GAME.ENGINE.draw(self.graphic_layer, self.surf, self.rect)
 
   @property
   def sprite(self):
@@ -42,7 +42,8 @@ class Sprite(pygame.Rect):
     self._surf = new_surf
     self.size = self.surf.get_size()
 
-  def drawable_rect(self):
+  @property
+  def rect(self):
     return self.GAME.ENGINE.camera.clip(self)
 
   def __repr__(self):

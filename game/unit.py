@@ -11,5 +11,4 @@ class Unit(Entity):
     super().__init__(GAME, (100.0, 100.0))
 
   def tick(self):
-    # Should most likely use tick
-    super().real_time_tick()
+    super()._real_time_tick()

@@ -14,10 +14,12 @@ class Entity(Sprite):
   def tick(self, t):
     self.timeInterval = t - self.updated_at
     self.updated_at = t
+    # TODO remove
     self.move_ip(1, 1)
+
     self.draw()
 
-  def real_time_tick(self):
+  def _real_time_tick(self):
     Entity.tick(self, pygame.time.get_ticks())
 
   # TODO add dunders

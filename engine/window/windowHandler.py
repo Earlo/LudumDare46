@@ -16,11 +16,12 @@ class WindowHandler(GuiHandler, BgrHandler):
 
     self.needs_resize = False
     self.last_resie_request = 0
-
     self.camera = GameCamera(self.w, self.h)
-
     self.updates = defaultdict(list)
     self.flip = False
+
+  def draw(self, depth, surface, rect):
+    self.updates[depth].append((surface, rect))
 
   def rezise_request(self, event):
     self.needs_resize = True

@@ -22,12 +22,8 @@ class Sprite(pygame.Rect):
   def change_sprite(self, sprite_type, sprite):
     self.surf = self.GAME.ENGINE.graphical_asset_handler[sprite_type][sprite]
 
-  # TODO this method blits, doesn't draw
-  # TODO the updated surface should be configurable,
-  # now it defaults to entity behaviour
-  # Handle bgr cases and such
   def draw(self):
-    self.GAME.ENGINE.updates[self.graphic_layer].append((self.surf, self.drawable_rect()))
+    self.GAME.ENGINE.draw(self.graphic_layer, self.surf, self.drawable_rect())
 
   @property
   def sprite(self):

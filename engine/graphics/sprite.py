@@ -15,6 +15,7 @@ class Sprite(pygame.Rect):
     self.change_sprite_to(0)
     super().__init__((0, 0), self._surf.get_size())
 
+  # TODO make sprite a property
   def change_sprite_to(self, i):
     self.sprite = self.sprites[i]
     self.change_sprite(self.sprite_type, self.sprite)

@@ -14,4 +14,5 @@ class GameCamera(pygame.Rect):
 
   def debug_move(self):
     self.movement_direction += 0.05
-    self.move_camera(5 * cos(self.movement_direction), 5 * sin(self.movement_direction))
+    self.move_camera(5 * cos(self.movement_direction),
+                     5 * sin(self.movement_direction))

@@ -2,7 +2,6 @@ import pygame
 
 from .sprite import Sprite
 
-
 class Entity(Sprite):
   def __init__(self, GAME, pos, time=pygame.time.get_ticks()):
     super().__init__(GAME, "sprites")

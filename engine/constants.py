@@ -4,7 +4,6 @@ import __main__
 
 BASEPATH = os.path.dirname(os.path.realpath(__main__.__file__))
 
-
 LANGUAGE = "english"
 
 # SWIDTH =  800

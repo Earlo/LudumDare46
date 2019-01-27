@@ -1,6 +1,8 @@
 """
 This the Pygearlo, pygame powered GUI, Asset and Event manager system
 """
+# DEBUG
+import pdb
 
 import sys
 from engine import engine
@@ -11,3 +13,4 @@ if sys.version_info < (3, 0):
 
 if __name__ == "__main__":
   engine.start()
+  # pdb.run('engine.start()')

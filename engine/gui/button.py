@@ -32,7 +32,6 @@ class Button(Widget):  # Menu Button
 
   def draw(self):
     self.surf.fill(self.i_colour)
-
     # old
     pygame.draw.rect(self.surf, self.cb_colour, self.rect.inflate(-2, -2), 1)
     pygame.draw.rect(self.surf, self.b_colour, self.rect, 1)
@@ -71,7 +70,6 @@ class Button(Widget):  # Menu Button
   def on_click(self, event):
     if self.c_rect.collidepoint(event.pos):
       if event.type == pygame.MOUSEBUTTONUP:
-        # print(self)
         self.down = True
         self.change_colours()
         self.send_fucntion_request(self.func[:])

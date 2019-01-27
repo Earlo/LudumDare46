@@ -79,7 +79,6 @@ def start():
   global PROGRAM
   PROGRAM = Engine()
   load_assets()
-
   PROGRAM.run()
   pygame.quit()
 

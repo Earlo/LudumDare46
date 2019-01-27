@@ -73,5 +73,5 @@ class Widget:
     signal = pygame.event.Event(CALLTYPE, {"func": f, "param": func})
     pygame.event.post(signal)
 
-  def debug(self):
-    print("values for this widget", self, "are:\n", self.pos, "\n", self.rect, "\n", self.c_rect)
+  def __repr__(self):
+    return "values for this widget are: {}, {}, {}".format(self.pos, self.rect, self.c_rect)

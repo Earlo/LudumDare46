@@ -11,7 +11,7 @@ class Entity(Sprite):
     # self.updated_at = self.created_at
     self.timeInterval = 0
 
-    self.velocity = (0.001, 0.001)
+    self.velocity = (0.005, 0.005)
 
   def tick(self, t):
     self.timeInterval = t

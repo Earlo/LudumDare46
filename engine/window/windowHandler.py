@@ -40,7 +40,6 @@ class WindowHandler(GuiHandler, BgrHandler):
         self.flip = True
 
     update_rects = self.blit_updates()
-
     if self.flip:
       self.flip = False
       pygame.display.flip()
@@ -58,7 +57,9 @@ class WindowHandler(GuiHandler, BgrHandler):
         sprite, rect, area = change
         self.window.blit(sprite, rect.move(cam_x, cam_y), area)
         update_rects.append(rect)
-        self.to_erase.append(rect)
+        # TODO fix design error
+        # Only things that have moved should be erased
+        # self.to_erase.append(rect)
       self.to_display[depth] = []
     return update_rects
 
@@ -81,4 +82,4 @@ class WindowHandler(GuiHandler, BgrHandler):
 
     # TODO no
     self.window.blit(self.surf_GUI, self.camera, self.gui_area)
-    self.window.blit(self.bgr_surf, self.camera, self.bgr_area)
+    # self.window.blit(self.bgr_surf, self.camera, self.bgr_area)

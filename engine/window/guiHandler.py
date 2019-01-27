@@ -19,6 +19,7 @@ class GuiHandler(BaseSurfaceHandler):
 
     # from ..Gui import screens
     # self.load_GUI(screens.SMainMenu)
+
   # TODO remove
   def test_gui(self):
     self.GUI = [Button(self.surf_GUI,

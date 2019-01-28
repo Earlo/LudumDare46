@@ -4,7 +4,6 @@ import itertools
 from .baseSurfaceHandler import BaseSurfaceHandler
 
 
-# NOTE Extend a bgr class form SPRITE if we want to add parallax bgr support
 class BgrHandler(BaseSurfaceHandler):
 
   def __init__(self):

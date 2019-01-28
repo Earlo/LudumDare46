@@ -73,13 +73,3 @@ class WindowHandler(GuiHandler, BgrHandler):
       update_rects.append(rect)
     self.to_erase = []
     return update_rects
-
-  def blit_everything(self):
-
-    # TODO refactor
-    # for e in self.GAME.entities:
-    #   self.surf_GAME.blit(e.CURRENTSURFACE, e)
-
-    # TODO no
-    self.window.blit(self.surf_GUI, self.camera, self.gui_area)
-    # self.window.blit(self.bgr_surf, self.camera, self.bgr_area)

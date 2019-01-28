@@ -1,12 +1,14 @@
 import pygame
 from game.game import Game
 
+
+from .singleton import Singleton
 from .window.windowHandler import WindowHandler
 from .constants import FUNCTIONCALLEVENT, nothing
 # TODO localization system
 
 
-class Engine(WindowHandler):
+class Engine(WindowHandler, metaclass=Singleton):
   FPS = 60
   GAME = None
 

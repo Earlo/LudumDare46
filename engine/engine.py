@@ -40,7 +40,7 @@ class Engine(WindowHandler):
       self.update_display()
 
       self.clock.tick(self.FPS)
-      pygame.display.set_caption("FPS: %i" % self.clock.get_fps())
+      pygame.display.set_caption("FPS: {}".format(self.clock.get_fps()))
 
   def mousehandler(self, event):
     # TODO make mousehandler
@@ -75,6 +75,7 @@ def start():
   pygame.init()
   pygame.display.init()
   pygame.font.init()
+  print("Running SDL {}".format(pygame.get_sdl_version()))
 
   global PROGRAM
   PROGRAM = Engine()

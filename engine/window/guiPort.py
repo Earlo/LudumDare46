@@ -9,7 +9,7 @@ class GuiPort(ViewPort):
 
   def __init__(self, x, y):
     super().__init__(x, y)
-
+    self.fill((50, 100, 50))
     self.GUI = []
     self.active_text_field = None
     self.active_drag_obj = None

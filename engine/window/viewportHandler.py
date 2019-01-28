@@ -46,6 +46,7 @@ class ViewportHandler(metaclass=Singleton):
         self.flip = True
 
     update_rects = self.blit_updates()
+    print(update_rects)
     if self.flip:
       self.flip = False
       pygame.display.flip()

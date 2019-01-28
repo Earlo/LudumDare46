@@ -31,7 +31,7 @@ class Engine(metaclass=Singleton):
     self.test_gui()
 
   def test_gui(self):
-    self.viewportHandler.GUI = [Button(self.viewportHandler.viewPorts['GUI'],
+    self.viewportHandler.viewPorts['GUI'].GUI = [Button(self.viewportHandler.viewPorts['GUI'],
                                 (0.2, 0.1), (.1, 0.1),
                                 "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
     self.viewportHandler.viewPorts['GUI'].refresh_GUI()

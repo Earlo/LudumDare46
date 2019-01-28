@@ -1,25 +1,31 @@
 import pygame
 from collections import defaultdict
 
-from .guiHandler import GuiHandler
-from .bgrHandler import BgrHandler
 from .gameCamera import GameCamera
+from .guiPort import GuiPort
+
+from ..singleton import Singleton
+from ..constants import SWIDTH, SHEIGTH
 
 
-class WindowHandler(GuiHandler, BgrHandler):
+class ViewportHandler(metaclass=Singleton):
   def __init__(self):
-
-    super().__init__()
-    self.window = pygame.display.set_mode((self.w, self.h),
-                                          pygame.HWSURFACE |
-                                          pygame.DOUBLEBUF)
+    self.window = pygame.display.set_mode((SWIDTH, SHEIGTH),
+                                          pygame.HWSURFACE | pygame.DOUBLEBUF)
 
     self.needs_resize = False
-    self.last_resie_request = 0
-    self.camera = GameCamera(self, self.w, self.h)
+    self.last_resize_request = 0
+
+    # self.relative_cordinate(self.parent_surf, *self.rsurf)
+    self.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH)}
+    self.camera = GameCamera(self, SWIDTH, SHEIGTH)
     self.to_display = defaultdict(list)
     self.to_erase = []
     self.flip = False
+
+  def blit_GUI(self):
+    self.draw_frame(0, self.viewPorts['GUI'], self.viewPorts['GUI'].gui_area)
+    self.flip = True
 
   def draw_frame(self, depth, surface, rect, area=None):
     self.to_display[depth].append((surface, rect, area))
@@ -29,12 +35,12 @@ class WindowHandler(GuiHandler, BgrHandler):
 
   def rezise_request(self, event):
     self.needs_resize = True
-    self.last_resie_request = pygame.time.get_ticks()
+    self.last_resize_request = pygame.time.get_ticks()
     super().rezise_request(event)
 
   def update_display(self):
     if self.needs_resize:
-      if pygame.time.get_ticks() - self.last_resie_request > 50:
+      if pygame.time.get_ticks() - self.last_resize_request > 50:
         self.update_resolution()
         self.needs_resize = False
         self.flip = True

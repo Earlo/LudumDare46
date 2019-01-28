@@ -20,7 +20,7 @@ class Sprite(pygame.Rect):
     self.change_sprite(self.sprite_type, self.sprite)
 
   def change_sprite(self, sprite_type, sprite):
-    self.surf = self.GAME.ENGINE.graphical_asset_handler[sprite_type][sprite]
+    self.surf = self.GAME.ENGINE.graphicalAssetHandler[sprite_type][sprite]
 
   def draw(self):
     self.GAME.ENGINE.draw_frame(self.graphic_layer, self.surf, self)

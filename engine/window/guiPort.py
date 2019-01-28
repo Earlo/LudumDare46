@@ -1,32 +1,23 @@
 import pygame
 
-from .baseSurfaceHandler import BaseSurfaceHandler
+from .viewPort import ViewPort
 from ..constants import FUNCTIONCALLEVENT
 from ..gui.button import Button
 
 
-class GuiHandler(BaseSurfaceHandler):
+class GuiPort(ViewPort):
 
-  def __init__(self):
-    super().__init__()
+  def __init__(self, x, y):
+    super().__init__(x, y)
 
     self.GUI = []
     self.active_text_field = None
     self.active_drag_obj = None
 
-    self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
-    self.gui_area = pygame.Rect(0, 0, self.w, self.h)
+    self.gui_area = self.get_rect()
 
     # from ..Gui import screens
     # self.load_GUI(screens.SMainMenu)
-
-  # TODO remove
-  def test_gui(self):
-    self.GUI = [Button(self.surf_GUI,
-                       (0.2, 0.1), (.1, 0.1),
-                       "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
-    self.refresh_GUI()
-    self.blit_GUI()
 
   def update_resolution(self):
     super().update_resolution()
@@ -38,8 +29,6 @@ class GuiHandler(BaseSurfaceHandler):
       wid.blit()
 
   def reset_GUI(self):
-    self.surf_GUI = pygame.Surface((self.w, self.h), pygame.HWSURFACE)
-
     self.GUI = []
     self.active_text_field = None
 
@@ -55,12 +44,7 @@ class GuiHandler(BaseSurfaceHandler):
     self.refresh_GUI()
     self.blit_GUI()
 
-  # TODO, less copypasta
-  def blit_GUI(self):
-    self.draw_frame(0, self.surf_GUI, self.gui_area)
-    self.flip = True
-
   def adjust_GUI(self):
     for wid in self.GUI:
-      wid.adjust(self.surf_GUI)
+      wid.adjust(self)
     self.refresh_GUI()

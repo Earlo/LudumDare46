@@ -20,7 +20,7 @@ class BgrHandler(BaseSurfaceHandler):
   def background_tile(self, new_tile):
     # self.reset_background()
     self._background_tile = new_tile
-    tile = self.graphical_asset_handler['bgr'][new_tile]
+    tile = self.graphicalAssetHandler['bgr'][new_tile]
     for x, y in itertools.product(range(0, self.w, tile.get_width()),
                                   range(0, self.h, tile.get_height())):
       self.bgr_surf.blit(tile, (x, y), tile.get_rect())

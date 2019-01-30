@@ -1,5 +1,4 @@
 import pygame
-from collections import defaultdict
 
 from .gameCamera import GameCamera
 from .guiPort import GuiPort
@@ -10,8 +9,7 @@ from ..constants import SWIDTH, SHEIGTH
 
 class ViewportHandler(metaclass=Singleton):
   def __init__(self):
-    self.window = pygame.display.set_mode((SWIDTH, SHEIGTH),
-                                          pygame.HWSURFACE | pygame.DOUBLEBUF)
+    self.window = pygame.display.set_mode((SWIDTH, SHEIGTH), pygame.DOUBLEBUF)
 
     self.needs_resize = False
     self.last_resize_request = 0
@@ -19,16 +17,8 @@ class ViewportHandler(metaclass=Singleton):
     # self.relative_cordinate(self.parent_surf, *self.rsurf)
     self.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH)}
     self.camera = GameCamera(self, SWIDTH, SHEIGTH)
-    self.to_display = defaultdict(list)
     self.to_erase = []
     self.flip = False
-
-  def blit_GUI(self):
-    self.draw_frame(0, self.viewPorts['GUI'], self.viewPorts['GUI'].gui_area)
-    self.flip = True
-
-  def draw_frame(self, depth, surface, rect, area=None):
-    self.to_display[depth].append((surface, rect, area))
 
   def force_erase(self, rect):
     self.to_erase.append(rect)
@@ -46,7 +36,8 @@ class ViewportHandler(metaclass=Singleton):
         self.flip = True
 
     update_rects = self.blit_updates()
-    print(update_rects)
+    if not (update_rects == []):
+      print(update_rects)
     if self.flip:
       self.flip = False
       pygame.display.flip()
@@ -55,19 +46,16 @@ class ViewportHandler(metaclass=Singleton):
 
   def blit_updates(self):
     update_rects = self.erase()
-    sorted(self.to_display)
 
-    cam_x = -self.camera.x
-    cam_y = -self.camera.y
-    for depth in self.to_display:
-      for change in self.to_display[depth]:
-        sprite, rect, area = change
-        self.window.blit(sprite, rect.move(cam_x, cam_y), area)
-        update_rects.append(rect)
+    for VP in self.viewPorts.values():
+      # TODO vp.updateGenerator
+      for change in VP.updates:
+        self.window.blit(VP, change, change)
+        update_rects.append(change)
         # TODO fix design error
         # Only things that have moved should be erased
         # self.to_erase.append(rect)
-      self.to_display[depth] = []
+      VP.updates = []
     return update_rects
 
   def erase(self):

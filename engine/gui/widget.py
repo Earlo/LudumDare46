@@ -39,8 +39,9 @@ class Widget:
     else:
       pos = self.relative_position()
 
-    self.parent_surf.blit(surf, pos, area)
+    return self.parent_surf.blit(surf, pos, area)
 
+    #TODO figure if neccessary
     if update:
       if area is None:
         area = self.rect.copy()

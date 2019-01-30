@@ -25,14 +25,15 @@ class GuiPort(ViewPort):
 
   def refresh_GUI(self):
     for wid in self.GUI:
+      print("Doin")
       wid.draw()
-      wid.blit()
+      self.updates.append(wid.blit())
 
   def reset_GUI(self):
     self.GUI = []
     self.active_text_field = None
-
-    self.blit_GUI()
+    
+    # self.blit_GUI()
 
   def load_GUI(self, GUI):
     self.reset_GUI()
@@ -48,3 +49,9 @@ class GuiPort(ViewPort):
     for wid in self.GUI:
       wid.adjust(self)
     self.refresh_GUI()
+
+  # def blit_GUI(self):
+  #   self.draw_frame(0, self, self.gui_area)
+
+  # def draw_frame(self, depth, surface, rect, area=None):
+  #   self.to_display[depth].append((surface, rect, area))

@@ -35,7 +35,7 @@ class Engine(metaclass=Singleton):
                                 (0.2, 0.1), (.1, 0.1),
                                 "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
     self.viewportHandler.viewPorts['GUI'].refresh_GUI()
-    self.viewportHandler.blit_GUI()
+    #self.viewportHandler.blit_GUI()
 
   def run(self):
     while not self.done:
@@ -61,14 +61,14 @@ class Engine(metaclass=Singleton):
     # TODO make mousehandler
     if event.button == 1:
       self.mouse[1] = True
-      for obj in self.GUI:
+      for obj in self.viewportHandler.viewPorts['GUI'].GUI:
         obj.on_click(event)
-    if event.type == pygame.MOUSEBUTTONUP:
-      self.active_drag_obj = None
-    elif event.type == pygame.MOUSEBUTTONDOWN:
-      if self.active_text_field is not None:
-        self.active_text_field.inactivate()
-        self.active_text_field = None
+    # if event.type == pygame.MOUSEBUTTONUP:
+    #  self.active_drag_obj = None
+    # if event.type == pygame.MOUSEBUTTONDOWN:
+    #  if self.active_text_field is not None:
+    #    self.active_text_field.inactivate()
+    #    self.active_text_field = None
 
   def call_one_time_function(self, e):
     e.func(*e.param)
@@ -76,11 +76,12 @@ class Engine(metaclass=Singleton):
   # TODO move these
   def STARTGAME(self):
     self.GAME = Game(self)
-    self.reset_GUI()
+    self.viewportHandler.viewPorts['GUI'].reset_GUI()
     self.on_tick_action = self.game_tick
 
   def game_tick(self):
-    self.window.fill((0, 0, 255))
+
+    self.viewportHandler.window.fill((0, 0, 255))
     self.GAME.tick()
     # DEBUG
     self.camera.debug_move()

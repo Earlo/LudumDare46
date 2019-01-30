@@ -3,6 +3,7 @@ import pygame
 # TODO DESIGN should inherit Rect or Surface?
 # RECT is unique for everyone, SPRITE isn't
 
+
 class Sprite(pygame.Rect):
   # example
   sprites = ["frog"]

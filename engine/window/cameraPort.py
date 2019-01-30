@@ -1,10 +1,10 @@
 import pygame
 import itertools
 
-from .baseSurfaceHandler import BaseSurfaceHandler
+from .viewPort import ViewPort
 
 
-class BgrHandler(BaseSurfaceHandler):
+class cameraPort(ViewPort):
 
   def __init__(self):
     super().__init__()

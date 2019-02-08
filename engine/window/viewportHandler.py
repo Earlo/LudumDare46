@@ -2,6 +2,7 @@ import pygame
 
 from .gameCamera import GameCamera
 from .guiPort import GuiPort
+from .cameraPort import CameraPort
 
 from ..singleton import Singleton
 from ..constants import SWIDTH, SHEIGTH
@@ -15,7 +16,8 @@ class ViewportHandler(metaclass=Singleton):
     self.last_resize_request = 0
 
     # self.relative_cordinate(self.parent_surf, *self.rsurf)
-    self.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH)}
+    self.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH),
+                      'GAME': CameraPort(SWIDTH, SHEIGTH)}
     self.camera = GameCamera(self, SWIDTH, SHEIGTH)
     self.to_erase = []
     self.flip = False
@@ -23,10 +25,11 @@ class ViewportHandler(metaclass=Singleton):
   def force_erase(self, rect):
     self.to_erase.append(rect)
 
-  def rezise_request(self, event):
+  def resize(self, event):
     self.needs_resize = True
     self.last_resize_request = pygame.time.get_ticks()
-    super().rezise_request(event)
+    for wp in self.viewPorts.values:
+      wp.resize(event)
 
   def update_display(self):
     if self.needs_resize:

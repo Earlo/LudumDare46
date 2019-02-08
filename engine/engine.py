@@ -5,37 +5,31 @@ from .graphicalAssetHandler import GraphicalAssetHandler
 
 from .singleton import Singleton
 from .window.viewportHandler import ViewportHandler
-from .constants import FUNCTIONCALLEVENT, nothing
-# TODO localization system
-
 from .constants import FUNCTIONCALLEVENT
-from .gui.button import Button
+# TODO localization system
 
 
 class Engine(metaclass=Singleton):
   FPS = 60
-  GAME = None
-  graphicalAssetHandler = GraphicalAssetHandler()
+  graphicalAssetHandler = GraphicalAssetHandler()  
   viewportHandler = ViewportHandler()
 
+  graphicalAssetHandler.load('sprites',
+                             colorkey_pos=(0, 0),
+                             flags=[pygame.RLEACCEL])
+  graphicalAssetHandler.load('portrat',
+                             colorkey_pos=(0, 0))
+  graphicalAssetHandler.load('bgr')
+  
   def __init__(self):
     super().__init__()
     self.done = False
     self.clock = pygame.time.Clock()
-    self.on_tick_action = nothing
 
     # TODO mouse object
     self.mouse = [pygame.mouse.get_pos(), False, [0, 0], None]
 
-    # TODO remove
-    self.test_gui()
-
-  def test_gui(self):
-    self.viewportHandler.viewPorts['GUI'].GUI = [Button(self.viewportHandler.viewPorts['GUI'],
-                                (0.2, 0.1), (.1, 0.1),
-                                "tesets", [FUNCTIONCALLEVENT, self.STARTGAME])]
-    self.viewportHandler.viewPorts['GUI'].refresh_GUI()
-    #self.viewportHandler.blit_GUI()
+    self.GAME = Game(self)
 
   def run(self):
     while not self.done:
@@ -51,7 +45,7 @@ class Engine(metaclass=Singleton):
         elif event.type == FUNCTIONCALLEVENT:
           self.call_one_time_function(event)
 
-      self.on_tick_action()
+      self.game_tick()
       self.viewportHandler.update_display()
 
       self.clock.tick(self.FPS)
@@ -73,18 +67,12 @@ class Engine(metaclass=Singleton):
   def call_one_time_function(self, e):
     e.func(*e.param)
 
-  # TODO move these
-  def STARTGAME(self):
-    self.GAME = Game(self)
-    self.viewportHandler.viewPorts['GUI'].reset_GUI()
-    self.on_tick_action = self.game_tick
-
   def game_tick(self):
 
     self.viewportHandler.window.fill((0, 0, 255))
     self.GAME.tick()
     # DEBUG
-    self.camera.debug_move()
+    # self.camera.debug_move()
 
 
 def start():
@@ -95,18 +83,5 @@ def start():
 
   global PROGRAM
   PROGRAM = Engine()
-  load_assets()
   PROGRAM.run()
   pygame.quit()
-
-
-def load_assets():
-  # TODO replace folder names with constants
-  PROGRAM.graphicalAssetHandler.load('sprites',
-                                     colorkey_pos=(0, 0),
-                                     flags=[pygame.RLEACCEL])
-
-  PROGRAM.graphicalAssetHandler.load('portrat',
-                                     colorkey_pos=(0, 0))
-
-  PROGRAM.graphicalAssetHandler.load('bgr')

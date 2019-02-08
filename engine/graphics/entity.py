@@ -2,11 +2,14 @@ import pygame
 
 from .sprite import Sprite
 
+from ..window.viewportHandler import ViewportHandler
+
+
 class Entity(Sprite):
-  def __init__(self, GAME, pos, time=pygame.time.get_ticks()):
-    super().__init__(GAME, "sprites")
-    self.topleft = pos
+  def __init__(self, pos, time=pygame.time.get_ticks()):
+    super().__init__(ViewportHandler().viewPorts["GAME"], "sprites")
     self.float_pos = pos
+    self.topleft = pos
     self.created_at = time
     # self.updated_at = self.created_at
     self.timeInterval = 0

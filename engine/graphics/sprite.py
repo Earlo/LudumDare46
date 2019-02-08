@@ -1,16 +1,18 @@
 import pygame
 
+from ..graphicalAssetHandler import GraphicalAssetHandler
 # TODO DESIGN should inherit Rect or Surface?
-# RECT is unique for everyone, SPRITE isn't
+# RECT is unique for everyone, Grafic isn't
 
 
 class Sprite(pygame.Rect):
   # example
   sprites = ["frog"]
   graphic_layer = 0
+  graphicalAssetHandler = GraphicalAssetHandler()
 
-  def __init__(self, GAME, sprite_type):
-    self.GAME = GAME
+  def __init__(self, parent_surf, sprite_type):
+    self.parent_surf = parent_surf
     self.sprite_type = sprite_type
     self.change_sprite_to(0)
     super().__init__((0, 0), self._surf.get_size())
@@ -21,10 +23,10 @@ class Sprite(pygame.Rect):
     self.change_sprite(self.sprite_type, self.sprite)
 
   def change_sprite(self, sprite_type, sprite):
-    self.surf = self.GAME.ENGINE.graphicalAssetHandler[sprite_type][sprite]
+    self.surf = self.graphicalAssetHandler[sprite_type][sprite]
 
   def draw(self):
-    self.GAME.ENGINE.draw_frame(self.graphic_layer, self.surf, self)
+    self.parent_surf.blit(self.surf, self)
 
   @property
   def sprite(self):
@@ -43,9 +45,10 @@ class Sprite(pygame.Rect):
     self._surf = new_surf
     self.size = self.surf.get_size()
 
-  @property
-  def rect(self):
-    return self.GAME.ENGINE.camera.clip(self)
+  # This is shit
+  # @property
+  # def rect(self):
+  #  return self.GAME.ENGINE.camera.clip(self)
 
   def __repr__(self):
     return "Sprite {0} {1} at {2} ".format(self.sprite_type, self.sprite, self)

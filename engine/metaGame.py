@@ -3,11 +3,17 @@ from abc import ABC  # abstractmethod
 
 class MetaGame(ABC):
   def __init__(self, ENGINE):
-    self.ENGINE = ENGINE
+    self._ENGINE = ENGINE
     self.entities = []
     print("geimu starttooo")
 
   def tick(self):
-    time = self.ENGINE.clock.get_time()
+    time = self._ENGINE.clock.get_time()
     for e in self.entities:
       e.tick(time)
+
+  def load_gui(self, gui):
+    self._ENGINE.viewportHandler.viewPorts['GUI'].load_GUI(gui)
+
+  def load_bgr(self, bgr):
+    self._ENGINE.background_tile = bgr

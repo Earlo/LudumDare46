@@ -16,6 +16,7 @@ class ViewportHandler(metaclass=Singleton):
     self.last_resize_request = 0
 
     # self.relative_cordinate(self.parent_surf, *self.rsurf)
+    # The viewports should be defined as part of the game
     self.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH),
                       'GAME': CameraPort(SWIDTH, SHEIGTH)}
     self.camera = GameCamera(self, SWIDTH, SHEIGTH)

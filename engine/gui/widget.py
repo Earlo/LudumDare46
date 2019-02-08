@@ -69,6 +69,7 @@ class Widget:
 
   def send_fucntion_request(self, func):
     # TODO Rename
+    print(func)
     CALLTYPE = func.pop(0)
     f = func.pop(0)
     signal = pygame.event.Event(CALLTYPE, {"func": f, "param": func})

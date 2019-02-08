@@ -1,4 +1,8 @@
+from engine.constants import FUNCTIONCALLEVENT
 
 
-def testGui():
-  return [["BUTTON", (0.2, 0.1), (.1, 0.1), "tesets", []]]
+def testGui(GAME):
+  ui = [
+       ["BUTTON", (.2, .1), (.1, .1), "test", [FUNCTIONCALLEVENT, GAME.START]]
+  ]
+  return ui

@@ -68,7 +68,8 @@ class CameraPort(ViewPort):
 
   def clear_at(self, r):
     area = r.copy()
-    area.topleft = (r.x % self._tile.get_width(), r.y % self._tile.get_height())
+    area.topleft = (r.x % self._tile.get_width(),
+                    r.y % self._tile.get_height())
     print("Covering {}, with {} of {}".format(r, area, self._fillTile))
     self.surf.blit(self._fillTile, r, area)
     self.erase.append(r)

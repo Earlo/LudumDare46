@@ -11,19 +11,19 @@ class Sprite(pygame.Rect):
   graphic_layer = 0
   graphicalAssetHandler = GraphicalAssetHandler()
 
-  def __init__(self, parent, sprite_type):
+  def __init__(self, parent, asset_type):
     self.parent = parent
-    self.sprite_type = sprite_type
+    self.asset_type = asset_type
     self.change_sprite_to(0)
     super().__init__((0, 0), self._surf.get_size())
 
   # TODO make sprite a property
   def change_sprite_to(self, i):
     self.sprite = self.sprites[i]
-    self.change_sprite(self.sprite_type, self.sprite)
+    self.change_sprite(self.asset_type, self.sprite)
 
-  def change_sprite(self, sprite_type, sprite):
-    self.surf = self.graphicalAssetHandler[sprite_type][sprite]
+  def change_sprite(self, asset_type, sprite):
+    self.surf = self.graphicalAssetHandler[asset_type][sprite]
 
   def draw(self):
     print("adding {}".format(self))
@@ -54,6 +54,6 @@ class Sprite(pygame.Rect):
 
   def __repr__(self):
     try:
-      return "Sprite {0} {1} at {2} ".format(self.sprite_type, self.sprite, self)
+      return "Sprite {0} {1} at {2}".format(self.asset_type, self.sprite, self)
     except AttributeError:
       return "{}".format(self)

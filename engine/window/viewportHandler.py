@@ -7,6 +7,8 @@ from ..constants import SWIDTH, SHEIGTH
 class ViewportHandler(metaclass=Singleton):
   def __init__(self):
     self.window = pygame.display.set_mode((SWIDTH, SHEIGTH), pygame.DOUBLEBUF)
+    # NOTE the order of viewports matches the priority of the ports
+    self.viewPorts = {}
 
     self.needs_resize = False
     self.last_resize_request = 0

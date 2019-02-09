@@ -25,10 +25,6 @@ class Engine(metaclass=Singleton):
   graphicalAssetHandler.load('portrat',
                              colorkey_pos=(0, 0))
   graphicalAssetHandler.load('bgr')
-  
-  # TODO The viewports should be defined as part of the game
-  viewportHandler.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH),
-                               'GAME': CameraPort(SWIDTH, SHEIGTH)}
 
   def __init__(self):
     super().__init__()
@@ -78,8 +74,6 @@ class Engine(metaclass=Singleton):
 
   def game_tick(self):
     self.GAME.tick()
-    # DEBUG
-    # self.camera.debug_move()
 
 
 def start():

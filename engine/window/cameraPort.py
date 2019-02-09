@@ -17,10 +17,7 @@ class CameraPort(ViewPort):
     self.previous = Rect(0, 0, x, y)
     self.camera = Rect(0, 0, x, y)
     self.movement_direction = 0
-    self._background_tile = ""
-    self._tile = None
-    self._fillTile = None
-
+    self.background = "DEBUG"
     self.DDD = False
 
   def get_updates(self):
@@ -33,6 +30,8 @@ class CameraPort(ViewPort):
       self._tile = self.graphicalAssetHandler['bgr']['checker_dark']
     self.DDD = not self.DDD
     """
+    # self.debug_move()
+
     self.erase = []
     for r in self.updates:
       self.clear_at(r.move(0, 0))
@@ -41,18 +40,19 @@ class CameraPort(ViewPort):
   def move_camera(self, x, y):
     self.previous = self.camera.copy()
     self.camera.move_ip(x, y)
-    self.camera.x = max((self.x, 0))
-    self.camera.y = max((self.y, 0))
+    self.camera.x = max((self.camera.x, 0))
+    self.camera.y = max((self.camera.y, 0))
     self.updates.append(self.get_rect())
 
   @property
-  def background_tile(self):
-    return self._background_tile
+  def background(self):
+    return self._bgr
 
-  @background_tile.setter
-  def background_tile(self, new_tile):
-    self._background_tile = new_tile
-    self._tile = self.graphicalAssetHandler['bgr'][new_tile]
+  @background.setter
+  def background(self, new_bgr):
+    print("setting bgr to {}".format(new_bgr))
+    self._bgr = new_bgr
+    self._tile = self.graphicalAssetHandler['bgr'][new_bgr]
     tw = self._tile.get_width()
     th = self._tile.get_height()
     self._fillTile = Surface((tw * 2, th * 2))

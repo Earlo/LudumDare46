@@ -8,6 +8,11 @@ from .window.viewportHandler import ViewportHandler
 from .constants import FUNCTIONCALLEVENT
 # TODO localization system
 
+# TODO move
+from .window.guiPort import GuiPort
+from .window.cameraPort import CameraPort
+from .constants import SWIDTH, SHEIGTH
+
 
 class Engine(metaclass=Singleton):
   FPS = 60
@@ -21,6 +26,10 @@ class Engine(metaclass=Singleton):
                              colorkey_pos=(0, 0))
   graphicalAssetHandler.load('bgr')
   
+  # TODO The viewports should be defined as part of the game
+  viewportHandler.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH),
+                               'GAME': CameraPort(SWIDTH, SHEIGTH)}
+
   def __init__(self):
     super().__init__()
     self.done = False

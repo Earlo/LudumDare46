@@ -15,4 +15,4 @@ class MetaGame(ABC):
     self._ENGINE.viewportHandler.viewPorts['GUI'].load_GUI(gui)
 
   def load_bgr(self, bgr):
-    self._ENGINE.background_tile = bgr
+    self._ENGINE.viewportHandler.viewPorts['GAME'].background_tile = bgr

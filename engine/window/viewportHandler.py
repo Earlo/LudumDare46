@@ -1,9 +1,5 @@
 import pygame
 
-from .gameCamera import GameCamera
-from .guiPort import GuiPort
-from .cameraPort import CameraPort
-
 from ..singleton import Singleton
 from ..constants import SWIDTH, SHEIGTH
 
@@ -16,15 +12,8 @@ class ViewportHandler(metaclass=Singleton):
     self.last_resize_request = 0
 
     # self.relative_cordinate(self.parent_surf, *self.rsurf)
-    # The viewports should be defined as part of the game
-    self.viewPorts = {'GUI': GuiPort(SWIDTH, SHEIGTH),
-                      'GAME': CameraPort(SWIDTH, SHEIGTH)}
-    self.camera = GameCamera(self, SWIDTH, SHEIGTH)
     self.to_erase = []
     self.flip = False
-
-  def force_erase(self, rect):
-    self.to_erase.append(rect)
 
   def resize(self, event):
     self.needs_resize = True
@@ -41,7 +30,7 @@ class ViewportHandler(metaclass=Singleton):
 
     update_rects = self.blit_updates()
     if not (update_rects == []):
-      print(update_rects)
+      print("Updating {}".format(update_rects))
     if self.flip:
       self.flip = False
       pygame.display.flip()
@@ -49,26 +38,11 @@ class ViewportHandler(metaclass=Singleton):
       pygame.display.update(update_rects)
 
   def blit_updates(self):
-    update_rects = self.erase()
-
+    update_rects = []
     for VP in self.viewPorts.values():
       # TODO vp.updateGenerator
       for change in VP.updates:
         self.window.blit(VP.surf, change, change)
         update_rects.append(change)
-        # TODO fix design error
-        # Only things that have moved should be erased
-        # self.to_erase.append(rect)
       VP.updates = []
-    return update_rects
-
-  def erase(self):
-    update_rects = []
-    cam_x = -self.camera.previous.x
-    cam_y = -self.camera.previous.y
-    for rect in self.to_erase:
-      pos = rect.move(cam_x, cam_y)
-      self.window.blit(self.bgr_surf, pos, rect)
-      update_rects.append(rect)
-    self.to_erase = []
     return update_rects

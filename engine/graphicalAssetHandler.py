@@ -21,7 +21,6 @@ class GraphicalAssetHandler(metaclass=Singleton):
 
   def load(self, end_path, colorkey_pos=False, flags=[]):
     self[end_path] = dict()
-    print("Loading {}".format(end_path))
     path_to_folder = os.path.join(self.asset_path, end_path)
     for root, dirs, files in os.walk(path_to_folder):
       for file in files:

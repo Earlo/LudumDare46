@@ -9,6 +9,9 @@ class ViewPort():
   def get_updates(self):
     return self.updates
 
+  def clear_updates(self):
+    self.updates = []
+
   def resize(self, event):
     # TODO FIX
     # self.w = event.w get_width()

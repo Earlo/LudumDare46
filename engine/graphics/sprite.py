@@ -26,6 +26,8 @@ class Sprite(pygame.Rect):
     self.surf = self.graphicalAssetHandler[sprite_type][sprite]
 
   def draw(self):
+    print("adding {}".format(self))
+    self.parent.updates.append(self)
     self.parent.surf.blit(self.surf, self)
 
   @property
@@ -51,4 +53,7 @@ class Sprite(pygame.Rect):
   #  return self.GAME.ENGINE.camera.clip(self)
 
   def __repr__(self):
-    return "Sprite {0} {1} at {2} ".format(self.sprite_type, self.sprite, self)
+    try:
+      return "Sprite {0} {1} at {2} ".format(self.sprite_type, self.sprite, self)
+    except AttributeError:
+      return "{}".format(self)

@@ -41,7 +41,7 @@ class Widget:
 
     return self.parent_surf.blit(surf, pos, area)
 
-    #TODO figure if neccessary
+    # TODO figure if neccessary
     if update:
       if area is None:
         area = self.rect.copy()
@@ -59,17 +59,16 @@ class Widget:
     pw, ph = parent.get_size()
     return[int(w * pw), int(h * ph)]
 
-  def RelativeHeight(self, parent, h):
+  def relative_height(self, parent, h):
     ph = parent.get_height()
     return int(h * ph)
 
-  def RelativeWidth(self, parent, w, h):
+  def relative_width(self, parent, w, h):
     pw = parent.get_width()
     return int(w * pw)
 
-  def send_fucntion_request(self, func):
+  def trigger(self, func):
     # TODO Rename
-    print(func)
     CALLTYPE = func.pop(0)
     f = func.pop(0)
     signal = pygame.event.Event(CALLTYPE, {"func": f, "param": func})

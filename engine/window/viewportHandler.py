@@ -40,9 +40,10 @@ class ViewportHandler(metaclass=Singleton):
   def blit_updates(self):
     update_rects = []
     for VP in self.viewPorts.values():
-      # TODO vp.updateGenerator
-      for change in VP.updates:
+      updates = VP.get_updates()
+      for change in updates:
         self.window.blit(VP.surf, change, change)
+        print("change of {}".format(change))
         update_rects.append(change)
-      VP.updates = []
+      VP.clear_updates()
     return update_rects

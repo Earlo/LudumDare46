@@ -16,7 +16,7 @@ class Game(MetaGame):
     super().tick()
 
   def START(self):
-    self.entities.append(Unit(self))
+    self.entities.append(Unit(self, (500.0, 500.0), (-.1, -.1)))
+    self.entities.append(Unit(self, (0.0, 200.0), (.1, .1)))
     self.level = ExampleLevel(self)
     self.load_gui(noGui(self))
-    print(self.entities)

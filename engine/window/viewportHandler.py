@@ -54,7 +54,7 @@ class ViewportHandler(metaclass=Singleton):
     for VP in self.viewPorts.values():
       # TODO vp.updateGenerator
       for change in VP.updates:
-        self.window.blit(VP, change, change)
+        self.window.blit(VP.surf, change, change)
         update_rects.append(change)
         # TODO fix design error
         # Only things that have moved should be erased

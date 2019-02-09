@@ -1,10 +1,10 @@
-import pygame
+from pygame import Surface
 
 
-class ViewPort(pygame.Surface):
+class ViewPort():
   def __init__(self, x, y):
-    super().__init__((x, y))
     self.updates = []
+    self.surf = Surface((x, y))
 
   def get_updates(self):
     return self.updates
@@ -14,3 +14,21 @@ class ViewPort(pygame.Surface):
     # self.w = event.w get_width()
     # self.h = event.h get_height()
     pass
+
+  def clear(self):
+    self.fill((255, 255, 255, 0))
+    self.updates.append(self.get_rect())
+
+  @property
+  def w(self):
+    return self.surf.get_width()
+
+  @property
+  def h(self):
+    return self.surf.get_height()
+
+  def fill(self, c):
+    self.surf.fill(c)
+
+  def get_rect(self):
+    return self.surf.get_rect()

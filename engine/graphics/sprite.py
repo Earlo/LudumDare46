@@ -11,8 +11,8 @@ class Sprite(pygame.Rect):
   graphic_layer = 0
   graphicalAssetHandler = GraphicalAssetHandler()
 
-  def __init__(self, parent_surf, sprite_type):
-    self.parent_surf = parent_surf
+  def __init__(self, parent, sprite_type):
+    self.parent = parent
     self.sprite_type = sprite_type
     self.change_sprite_to(0)
     super().__init__((0, 0), self._surf.get_size())
@@ -26,7 +26,7 @@ class Sprite(pygame.Rect):
     self.surf = self.graphicalAssetHandler[sprite_type][sprite]
 
   def draw(self):
-    self.parent_surf.blit(self.surf, self)
+    self.parent.surf.blit(self.surf, self)
 
   @property
   def sprite(self):

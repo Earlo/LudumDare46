@@ -7,7 +7,6 @@ class GuiPort(ViewPort):
 
   def __init__(self, x, y):
     super().__init__(x, y)
-    self.fill((50, 100, 50))
     self.GUI = []
     self.active_text_field = None
     self.active_drag_obj = None
@@ -19,11 +18,16 @@ class GuiPort(ViewPort):
     self.adjust_GUI()
 
   def refresh_GUI(self):
+    # TODO remove
+    from random import randrange
+    self.fill((randrange(255), randrange(255), randrange(255)))
+
     for wid in self.GUI:
       wid.draw()
       self.updates.append(wid.blit())
 
   def reset_GUI(self):
+    self.clear()
     self.GUI = []
     self.active_text_field = None
 
@@ -37,18 +41,12 @@ class GuiPort(ViewPort):
     # self.blit_GUI()
 
   def load_widget(self, w):
-    print(w)
     t = w[0]
     args = w[1:]
-    self.GUI.append(self.guiLib[t](self, *args))
+    # TODO figure, self or self surf
+    self.GUI.append(self.guiLib[t](self.surf, *args))
 
   def adjust_GUI(self):
     for wid in self.GUI:
       wid.adjust(self)
     self.refresh_GUI()
-
-  # def blit_GUI(self):
-  #   self.draw_frame(0, self, self.gui_area)
-
-  # def draw_frame(self, depth, surface, rect, area=None):
-  #   self.to_display[depth].append((surface, rect, area))

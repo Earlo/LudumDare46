@@ -68,8 +68,6 @@ class Engine(metaclass=Singleton):
     e.func(*e.param)
 
   def game_tick(self):
-
-    self.viewportHandler.window.fill((0, 0, 255))
     self.GAME.tick()
     # DEBUG
     # self.camera.debug_move()

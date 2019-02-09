@@ -2,7 +2,7 @@ from engine.metaGame import MetaGame
 from .level import ExampleLevel
 from .unit import Unit
 
-from .ui.screens import testGui
+from .ui.screens import testGui, noGui
 
 
 class Game(MetaGame):
@@ -16,6 +16,7 @@ class Game(MetaGame):
     super().tick()
 
   def START(self):
-    print(self.entities)
     self.entities.append(Unit(self))
     self.level = ExampleLevel(self)
+    self.load_gui(noGui(self))
+    print(self.entities)

@@ -5,7 +5,6 @@ class MetaGame(ABC):
   def __init__(self, ENGINE):
     self._ENGINE = ENGINE
     self.entities = []
-    print("geimu starttooo")
 
   def tick(self):
     time = self._ENGINE.clock.get_time()

@@ -72,4 +72,4 @@ class Button(Widget):  # Menu Button
       if event.type == pygame.MOUSEBUTTONUP:
         self.down = True
         self.change_colours()
-        self.send_fucntion_request(self.func[:])
+        self.trigger(self.func[:])

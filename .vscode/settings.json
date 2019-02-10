@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/Users/visapollari/VirtuaEnvs/Pygame/bin/python",
+  "python.pythonPath": "/usr/local/bin/python3",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,

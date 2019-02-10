@@ -15,7 +15,7 @@ class CameraPort(ViewPort):
     super().__init__(x, y)
     self.erase = []
     self.previous = Rect(0, 0, x, y)
-    self.camera = Rect(-100, 10, x, y)
+    self.camera = Rect(-100, -50, x, y)
     self.movement_direction = 0
     # self.background = "DEBUG"
     self.DDD = False
@@ -36,7 +36,7 @@ class CameraPort(ViewPort):
     self.erase = []
     for r in self.updates:
       # TODO figure the move
-      self.clear_at(r.move(0, 0))
+      self.clear_at(r)
     self.updates = []
 
   @property
@@ -46,6 +46,10 @@ class CameraPort(ViewPort):
   @property
   def y(self):
     return self.camera.y
+
+  @property
+  def pos(self):
+    return (self.x, self.y)
 
   def move_camera(self, x, y):
     self.previous = self.camera.copy()
@@ -67,29 +71,36 @@ class CameraPort(ViewPort):
     self.updates.append(self.get_rect())
 
   def clear_at(self, r):
+    cx = r.x - self.x
+    cy = r.y - self.y
+
+    # TODO to properties
     tw = self._tile.get_width()
     th = self._tile.get_height()
     tile_rect = self._tile.get_rect()
+
     clip_r = r.copy()
-    rangX = [r.x] + [(1 + n) * tw for n in range(r.x // tw, (r.x + r.w) // tw)]
-    rangY = [r.y] + [(1 + n) * th for n in range(r.y // th, (r.y + r.h) // th)]
+    rangX = [cx] + [(1 + n) * tw for n in range(cx // tw, (cx + r.w) // tw)]
+    rangY = [cy] + [(1 + n) * th for n in range(cy // th, (cy + r.h) // th)]
     for x, y in itertools.product(rangX, rangY):
       clip_r.topleft = (x % tw, y % th)
-      area = clip_r.clip(tile_rect)
+      area = clip_r.clip(tile_rect) # .move( (r.x - self.x) % tw, (r.y - self.y) % th)
+      print("erase:")
       # super().draw(self._tile, (x, y), area)
-      self.draw(self._tile, (x, y), area)
+      self.draw(self._tile, (x + self.x, y + self.y), area)
     self.erase.append(r)
 
   def draw(self, surf, pos, area):
-    print(self.x, self.y)
-    p = (pos[0] - self.x, pos[1] - self.y)
     print("drawing {} of {} at {}".format(area, surf, pos))
-    return super().draw(surf, p, area)
+    return super().draw(surf, pos, area)
 
   def display(self, surf, pos, area):
+    pos = (pos[0] - self.x, pos[1] - self.y)
     self.updates.append(self.draw(surf, pos, area))
 
   def debug_move(self):
     self.movement_direction += 0.05
     self.move_camera(5 * cos(self.movement_direction),
                      5 * sin(self.movement_direction))
+
+    #self.move_camera(5, 5)

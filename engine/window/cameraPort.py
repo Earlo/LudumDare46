@@ -17,21 +17,12 @@ class CameraPort(ViewPort):
     self.previous = Rect(0, 0, x, y)
     self.camera = Rect(-100, -50, x, y)
     self.movement_direction = 0
-    # self.background = "DEBUG"
-    self.DDD = False
 
   def get_updates(self):
     return self.erase + self.updates
 
   def clear_updates(self):
-    """
-    if self.DDD:
-      self.background = 'DEBUG'
-    else:
-      self.background = 'checker_dark'
-    self.DDD = not self.DDD
-    """
-    self.debug_move()
+    # self.debug_move()
 
     self.erase = []
     for r in self.updates:
@@ -84,23 +75,19 @@ class CameraPort(ViewPort):
     rangY = [cy] + [(1 + n) * th for n in range(cy // th, (cy + r.h) // th)]
     for x, y in itertools.product(rangX, rangY):
       clip_r.topleft = (x % tw, y % th)
-      area = clip_r.clip(tile_rect) # .move( (r.x - self.x) % tw, (r.y - self.y) % th)
-      print("erase:")
-      # super().draw(self._tile, (x, y), area)
-      self.draw(self._tile, (x - self.x, y - self.y), area)
+      area = clip_r.clip(tile_rect)
+      self.draw(self._tile, (x, y), area)
     self.erase.append(r)
 
   def draw(self, surf, pos, area):
-    print("drawing {} of {} at {}".format(area, surf, pos))
+    pos = (pos[0] - self.x, pos[1] - self.y)
     return super().draw(surf, pos, area)
 
   def display(self, surf, pos, area):
-    pos = (pos[0] - self.x, pos[1] - self.y)
     self.updates.append(self.draw(surf, pos, area))
 
   def debug_move(self):
     self.movement_direction += 0.05
     self.move_camera(5 * cos(self.movement_direction),
                      5 * sin(self.movement_direction))
-
-    #self.move_camera(5, 5)
+    # self.move_camera(5, 5)

@@ -1,8 +1,6 @@
 import pygame
 
 from ..graphicalAssetHandler import GraphicalAssetHandler
-# TODO DESIGN should inherit Rect or Surface?
-# RECT is unique for everyone, Grafic isn't
 
 
 class Sprite(pygame.Rect):

@@ -1,6 +1,6 @@
+import __main__
 import os
 import pygame
-import __main__
 
 from .singleton import Singleton
 
@@ -32,4 +32,3 @@ class GraphicalAssetHandler(metaclass=Singleton):
             img.set_colorkey(img.get_at(colorkey_pos), *flags)
 
           self[end_path][base_name] = img
-          

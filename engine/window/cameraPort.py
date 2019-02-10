@@ -1,10 +1,7 @@
 from pygame import Rect
 import itertools
 
-from math import sin, cos
-
 from .viewPort import ViewPort
-
 from ..graphicalAssetHandler import GraphicalAssetHandler
 
 
@@ -22,11 +19,10 @@ class CameraPort(ViewPort):
     return self.erase + self.updates
 
   def clear_updates(self):
-    # self.debug_move()
+    self.debug_move()
 
     self.erase = []
     for r in self.updates:
-      # TODO figure the move
       self.clear_at(r)
     self.updates = []
 
@@ -38,15 +34,9 @@ class CameraPort(ViewPort):
   def y(self):
     return self.camera.y
 
-  @property
-  def pos(self):
-    return (self.x, self.y)
-
   def move_camera(self, x, y):
     self.previous = self.camera.copy()
     self.camera.move_ip(x, y)
-    # self.camera.x = max((self.camera.x, 0))
-    # self.camera.y = max((self.camera.y, 0))
     self.updates.append(self.get_rect())
 
   @property
@@ -65,7 +55,6 @@ class CameraPort(ViewPort):
     cx = r.x + self.x
     cy = r.y + self.y
 
-    # TODO to properties
     tw = self._tile.get_width()
     th = self._tile.get_height()
     tile_rect = self._tile.get_rect()
@@ -87,6 +76,8 @@ class CameraPort(ViewPort):
     self.updates.append(self.draw(surf, pos, area))
 
   def debug_move(self):
+    from math import sin, cos
+
     self.movement_direction += 0.05
     self.move_camera(5 * cos(self.movement_direction),
                      5 * sin(self.movement_direction))

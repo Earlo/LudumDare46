@@ -68,7 +68,6 @@ class Widget:
     return int(w * pw)
 
   def trigger(self, func):
-    # TODO Rename
     CALLTYPE = func.pop(0)
     f = func.pop(0)
     signal = pygame.event.Event(CALLTYPE, {"func": f, "param": func})

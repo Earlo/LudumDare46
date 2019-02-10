@@ -38,7 +38,6 @@ class GuiPort(ViewPort):
     self.GUI_template = GUI
 
     self.refresh_GUI()
-    # self.blit_GUI()
 
   def load_widget(self, w):
     t = w[0]

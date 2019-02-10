@@ -1,7 +1,6 @@
 import pygame
 
 from .sprite import Sprite
-
 from ..window.viewportHandler import ViewportHandler
 
 
@@ -11,12 +10,11 @@ class Entity(Sprite):
     self.float_pos = pos
     self.topleft = pos
     self.created_at = time
-    # self.updated_at = self.created_at
+    self.updated_at = self.created_at
     self.timeInterval = 0
 
   def tick(self, t):
     self.timeInterval = t
-
     movement = [x * self.timeInterval for x in self.velocity]
     self.float_pos = tuple(map(sum, zip(self.float_pos, movement)))
     self.topleft = self.float_pos

@@ -2,7 +2,6 @@ import pygame
 from game.game import Game
 
 from .graphicalAssetHandler import GraphicalAssetHandler
-
 from .singleton import Singleton
 from .window.viewportHandler import ViewportHandler
 from .constants import FUNCTIONCALLEVENT

@@ -26,8 +26,7 @@ class Sprite(pygame.Rect):
     self.surf = self.graphicalAssetHandler[asset_type][sprite]
 
   def draw(self):
-    self.parent.updates.append(self)
-    self.parent.surf.blit(self.surf, self)
+    self.parent.display(self.surf, self.topleft, None)
 
   @property
   def sprite(self):

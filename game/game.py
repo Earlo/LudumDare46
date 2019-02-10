@@ -21,8 +21,8 @@ class Game(MetaGame):
   def START(self):
     self.add_cameraport("GAME", SWIDTH, SHEIGTH)
 
-    # self.entities.append(Unit(self, (500.0, 500.0), (-.1, -.1)))
-    self.entities.append(Unit(self, (0.0, 200.0), (.1, .1)))
+    #self.entities.append(Unit(self, (500.0, 500.0), (-.001, -.001)))
+    self.entities.append(Unit(self, (0.0, 200.0), (.02, .02)))
     self.level = ExampleLevel(self)
 
     self.load_gui(noGui(self))

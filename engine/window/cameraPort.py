@@ -15,7 +15,7 @@ class CameraPort(ViewPort):
     super().__init__(x, y)
     self.erase = []
     self.previous = Rect(0, 0, x, y)
-    self.camera = Rect(0, 0, x, y)
+    self.camera = Rect(-100, 10, x, y)
     self.movement_direction = 0
     # self.background = "DEBUG"
     self.DDD = False
@@ -31,7 +31,7 @@ class CameraPort(ViewPort):
       self.background = 'checker_dark'
     self.DDD = not self.DDD
     """
-    # self.debug_move()
+    self.debug_move()
 
     self.erase = []
     for r in self.updates:
@@ -48,7 +48,6 @@ class CameraPort(ViewPort):
     return self.camera.y
 
   def move_camera(self, x, y):
-    print("MBO")
     self.previous = self.camera.copy()
     self.camera.move_ip(x, y)
     # self.camera.x = max((self.camera.x, 0))
@@ -77,12 +76,18 @@ class CameraPort(ViewPort):
     for x, y in itertools.product(rangX, rangY):
       clip_r.topleft = (x % tw, y % th)
       area = clip_r.clip(tile_rect)
+      # super().draw(self._tile, (x, y), area)
       self.draw(self._tile, (x, y), area)
     self.erase.append(r)
 
   def draw(self, surf, pos, area):
+    print(self.x, self.y)
     p = (pos[0] - self.x, pos[1] - self.y)
-    super().draw(surf, p, area)
+    print("drawing {} of {} at {}".format(area, surf, pos))
+    return super().draw(surf, p, area)
+
+  def display(self, surf, pos, area):
+    self.updates.append(self.draw(surf, pos, area))
 
   def debug_move(self):
     self.movement_direction += 0.05

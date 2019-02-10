@@ -20,7 +20,7 @@ class ViewPort():
     self.updates.append(self.get_rect())
 
   def draw(self, surf, pos, area):
-    self.surf.blit(surf, pos, area)
+    return self.surf.blit(surf, pos, area)
 
   @property
   def w(self):

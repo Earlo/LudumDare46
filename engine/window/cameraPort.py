@@ -35,6 +35,7 @@ class CameraPort(ViewPort):
 
     self.erase = []
     for r in self.updates:
+      # TODO figure the move
       self.clear_at(r.move(0, 0))
     self.updates = []
 
@@ -50,8 +51,8 @@ class CameraPort(ViewPort):
     print("MBO")
     self.previous = self.camera.copy()
     self.camera.move_ip(x, y)
-    self.camera.x = max((self.camera.x, 0))
-    self.camera.y = max((self.camera.y, 0))
+    # self.camera.x = max((self.camera.x, 0))
+    # self.camera.y = max((self.camera.y, 0))
     self.updates.append(self.get_rect())
 
   @property
@@ -67,22 +68,21 @@ class CameraPort(ViewPort):
     self.updates.append(self.get_rect())
 
   def clear_at(self, r):
-    area = r.copy()
-    area.topleft = (r.x % self._tile.get_width(),
-                    r.y % self._tile.get_height())
-    print("Covering {}, with {} of {}".format(r, area, self._tile))
-
     tw = self._tile.get_width()
     th = self._tile.get_height()
     tile_rect = self._tile.get_rect()
-    for x, y in itertools.product(range(r.x, r.w, tw),
-                                  range(r.y, r.h, th)):
-      self.draw(self._tile, (x, y), tile_rect)
-
+    clip_r = r.copy()
+    rangX = [r.x] + [(1 + n) * tw for n in range(r.x // tw, (r.x + r.w) // tw)]
+    rangY = [r.y] + [(1 + n) * th for n in range(r.y // th, (r.y + r.h) // th)]
+    for x, y in itertools.product(rangX, rangY):
+      clip_r.topleft = (x % tw, y % th)
+      area = clip_r.clip(tile_rect)
+      self.draw(self._tile, (x, y), area)
     self.erase.append(r)
 
   def draw(self, surf, pos, area):
-    super().draw(surf, (pos[0] - self.x, pos[1] - self.y), area)
+    p = (pos[0] - self.x, pos[1] - self.y)
+    super().draw(surf, p, area)
 
   def debug_move(self):
     self.movement_direction += 0.05

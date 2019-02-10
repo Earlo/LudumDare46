@@ -29,8 +29,8 @@ class ViewportHandler(metaclass=Singleton):
         self.flip = True
 
     update_rects = self.blit_updates()
-    if not (update_rects == []):
-      print("Updating {}".format(update_rects))
+    # if not (update_rects == []):
+    # print("Updating {}".format(update_rects))
     if self.flip:
       self.flip = False
       pygame.display.flip()
@@ -43,7 +43,7 @@ class ViewportHandler(metaclass=Singleton):
       updates = VP.get_updates()
       for change in updates:
         self.window.blit(VP.surf, change, change)
-        print("change of {}".format(change))
+        # print("change of {}".format(change))
         update_rects.append(change)
       VP.clear_updates()
     return update_rects

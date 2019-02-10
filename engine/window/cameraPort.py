@@ -71,8 +71,8 @@ class CameraPort(ViewPort):
     self.updates.append(self.get_rect())
 
   def clear_at(self, r):
-    cx = r.x - self.x
-    cy = r.y - self.y
+    cx = r.x + self.x
+    cy = r.y + self.y
 
     # TODO to properties
     tw = self._tile.get_width()
@@ -87,7 +87,7 @@ class CameraPort(ViewPort):
       area = clip_r.clip(tile_rect) # .move( (r.x - self.x) % tw, (r.y - self.y) % th)
       print("erase:")
       # super().draw(self._tile, (x, y), area)
-      self.draw(self._tile, (x + self.x, y + self.y), area)
+      self.draw(self._tile, (x - self.x, y - self.y), area)
     self.erase.append(r)
 
   def draw(self, surf, pos, area):

@@ -8,11 +8,6 @@ from .window.viewportHandler import ViewportHandler
 from .constants import FUNCTIONCALLEVENT
 # TODO localization system
 
-# TODO move
-from .window.guiPort import GuiPort
-from .window.cameraPort import CameraPort
-from .constants import SWIDTH, SHEIGTH
-
 
 class Engine(metaclass=Singleton):
   FPS = 60

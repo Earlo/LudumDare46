@@ -1,4 +1,4 @@
-from pygame import Rect, Surface
+from pygame import Rect
 import itertools
 
 from math import sin, cos
@@ -17,17 +17,18 @@ class CameraPort(ViewPort):
     self.previous = Rect(0, 0, x, y)
     self.camera = Rect(0, 0, x, y)
     self.movement_direction = 0
-    self.background = "DEBUG"
+    # self.background = "DEBUG"
     self.DDD = False
 
   def get_updates(self):
     return self.erase + self.updates
 
   def clear_updates(self):
-    """if self.DDD:
-      self._tile = self.graphicalAssetHandler['bgr']['DEBUG']
+    """
+    if self.DDD:
+      self.background = 'DEBUG'
     else:
-      self._tile = self.graphicalAssetHandler['bgr']['checker_dark']
+      self.background = 'checker_dark'
     self.DDD = not self.DDD
     """
     # self.debug_move()
@@ -37,7 +38,16 @@ class CameraPort(ViewPort):
       self.clear_at(r.move(0, 0))
     self.updates = []
 
+  @property
+  def x(self):
+    return self.camera.x
+
+  @property
+  def y(self):
+    return self.camera.y
+
   def move_camera(self, x, y):
+    print("MBO")
     self.previous = self.camera.copy()
     self.camera.move_ip(x, y)
     self.camera.x = max((self.camera.x, 0))
@@ -53,16 +63,6 @@ class CameraPort(ViewPort):
     print("setting bgr to {}".format(new_bgr))
     self._bgr = new_bgr
     self._tile = self.graphicalAssetHandler['bgr'][new_bgr]
-    tw = self._tile.get_width()
-    th = self._tile.get_height()
-    self._fillTile = Surface((tw * 2, th * 2))
-
-    for x, y in itertools.product(range(0, self.w, tw),
-                                  range(0, self.h, self._tile.get_height())):
-      self.surf.blit(self._tile, (x, y), self._tile.get_rect())
-    for x, y in itertools.product(range(0, tw * 2, tw),
-                                  range(0, th * 2, th)):
-      self._fillTile.blit(self._tile, (x, y), self._tile.get_rect())
 
     self.updates.append(self.get_rect())
 
@@ -70,9 +70,19 @@ class CameraPort(ViewPort):
     area = r.copy()
     area.topleft = (r.x % self._tile.get_width(),
                     r.y % self._tile.get_height())
-    print("Covering {}, with {} of {}".format(r, area, self._fillTile))
-    self.surf.blit(self._fillTile, r, area)
+    print("Covering {}, with {} of {}".format(r, area, self._tile))
+
+    tw = self._tile.get_width()
+    th = self._tile.get_height()
+    tile_rect = self._tile.get_rect()
+    for x, y in itertools.product(range(r.x, r.w, tw),
+                                  range(r.y, r.h, th)):
+      self.draw(self._tile, (x, y), tile_rect)
+
     self.erase.append(r)
+
+  def draw(self, surf, pos, area):
+    super().draw(surf, (pos[0] - self.x, pos[1] - self.y), area)
 
   def debug_move(self):
     self.movement_direction += 0.05

@@ -12,8 +12,6 @@ class ViewportHandler(metaclass=Singleton):
 
     self.needs_resize = False
     self.last_resize_request = 0
-
-    # self.relative_cordinate(self.parent_surf, *self.rsurf)
     self.to_erase = []
     self.flip = False
 

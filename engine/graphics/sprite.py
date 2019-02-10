@@ -47,11 +47,6 @@ class Sprite(pygame.Rect):
     self._surf = new_surf
     self.size = self.surf.get_size()
 
-  # This is shit
-  # @property
-  # def rect(self):
-  #  return self.GAME.ENGINE.camera.clip(self)
-
   def __repr__(self):
     try:
       return "Sprite {0} {1} at {2}".format(self.asset_type, self.sprite, self)

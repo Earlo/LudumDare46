@@ -13,14 +13,14 @@ class ViewPort():
     self.updates = []
 
   def resize(self, event):
-    # TODO FIX
-    # self.w = event.w get_width()
-    # self.h = event.h get_height()
-    pass
+    self.surf = Surface((event.w, event.h))
 
   def clear(self):
     self.fill((255, 255, 255, 0))
     self.updates.append(self.get_rect())
+
+  def draw(self, surf, pos, area):
+    self.surf.blit(surf, pos, area)
 
   @property
   def w(self):

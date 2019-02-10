@@ -38,7 +38,7 @@ class Widget:
       pos = [x + y for x, y in zip(self.relative_position(), area.topleft)]
     else:
       pos = self.relative_position()
-
+    # TODO this alters the state of parent, not self. move to parent?
     return self.parent_surf.blit(surf, pos, area)
 
     # TODO figure if neccessary

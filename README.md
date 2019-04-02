@@ -1,2 +1,2 @@
 ### PyGearlo
-# Pygame wrapper that handles stuff you don't want to
+Pygearlo is a wrapper around Pygame that handles viewports, UI and game assets, creating clear seperation between the game logic and technical issues

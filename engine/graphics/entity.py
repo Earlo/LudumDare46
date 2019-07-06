@@ -24,8 +24,6 @@ class Entity(Sprite):
   def _real_time_tick(self):
     Entity.tick(self, pygame.time.get_ticks())
 
-  # TODO add dunders
-
   @property
   def age(self):
     return self.updated_at - self.created_at

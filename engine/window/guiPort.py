@@ -18,10 +18,6 @@ class GuiPort(ViewPort):
     self.adjust_GUI()
 
   def refresh_GUI(self):
-    # TODO remove
-    from random import randrange
-    self.fill((randrange(255), randrange(255), randrange(255)))
-
     for wid in self.GUI:
       wid.draw()
       self.updates.append(wid.blit())
@@ -42,7 +38,6 @@ class GuiPort(ViewPort):
   def load_widget(self, w):
     t = w[0]
     args = w[1:]
-    # TODO figure, self or self surf
     self.GUI.append(self.guiLib[t](self.surf, *args))
 
   def adjust_GUI(self):

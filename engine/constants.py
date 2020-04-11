@@ -28,4 +28,4 @@ UPDATEONTICKEVENT = pygame.USEREVENT + 3
 
 
 def nothing():
-  pass
+    pass

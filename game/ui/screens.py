@@ -2,11 +2,9 @@ from engine.constants import FUNCTIONCALLEVENT
 
 
 def noGui(GAME):
-  return []
+    return []
 
 
 def testGui(GAME):
-  ui = [
-       ["BUTTON", (.2, .1), (.1, .1), "test", [FUNCTIONCALLEVENT, GAME.START]]
-  ]
-  return ui
+    ui = [["BUTTON", (0.2, 0.1), (0.1, 0.1), "test", [FUNCTIONCALLEVENT, GAME.START]]]
+    return ui

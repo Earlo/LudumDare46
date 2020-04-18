@@ -19,8 +19,6 @@ class CameraPort(ViewPort):
         return self.erase + self.updates
 
     def clear_updates(self):
-        self.debug_move()
-
         self.erase = []
         for r in self.updates:
             self.clear_at(r)
@@ -74,12 +72,3 @@ class CameraPort(ViewPort):
 
     def display(self, surf, pos, area):
         self.updates.append(self.draw(surf, pos, area))
-
-    def debug_move(self):
-        from math import sin, cos
-
-        self.movement_direction += 0.05
-        self.move_camera(
-            5 * cos(self.movement_direction), 5 * sin(self.movement_direction)
-        )
-        # self.move_camera(5, 5)

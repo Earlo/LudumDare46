@@ -9,15 +9,14 @@ from ..unit_logic.move_to import MoveTo
 class Unit(Entity):
     idleframes = ["olive0"]
     walkingframes = ["olive0", "olive1", "olive2"]
-    frames = idleframes
-    animationSpeed = 10.0
-    graphic_layer = 1
+    direction = 0
 
     def __init__(self, GAME, pos):
         super().__init__(pos)
-        self.direction = pi
-        self.moving = False
+        self.frames = self.idleframes
+        self.moving = True
         self.speed = 0.2
+        self.animationSpeed = 10.0
         self.task = None
 
     def tick(self, t):

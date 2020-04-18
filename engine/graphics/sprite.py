@@ -8,6 +8,7 @@ class Sprite(pygame.Rect):
     frames = ["frog", "frog2"]
     graphic_layer = 0
     animationSpeed = 0
+    frameInverted = False
     graphicalAssetHandler = GraphicalAssetHandler()
 
     def __init__(self, parent, asset_type):
@@ -23,7 +24,12 @@ class Sprite(pygame.Rect):
         if self.animationSpeed > 0:
             if self.shouldUpdateFrame:
                 self.next_frame()
-        self.parent.display(self.surf, self.topleft, None)
+        if self.frameInverted:
+            self.parent.display(self.surf, self.topleft, None)
+        else:
+            self.parent.display(
+                pygame.transform.flip(self.surf, True, False), self.topleft, None
+            )
 
     def next_frame(self):
         self.frame = (self._frame + 1) % len(self.frames)

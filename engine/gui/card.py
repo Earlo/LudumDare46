@@ -21,10 +21,11 @@ class Card(Widget):
     def adjust(self, parent_surf, parent=None):
         self.adjust_p(parent_surf, parent)
         self.adjust_r()
-        font_size = int(self.rect.width / len(self.text)) + 5
-        if font_size > self.rect.height:
-            font_size = self.rect.height
-        self.font = pygame.font.SysFont(FONT, font_size)
+        self.font_size = int(self.rect.width / len(self.text)) + 5
+        if self.font_size > self.rect.height:
+            self.font_size = self.rect.height
+        self.font = pygame.font.SysFont(FONT, self.font_size)
+        self.create_lines()
 
     def change_text(self, new_text):
         if not type(new_text) == list:

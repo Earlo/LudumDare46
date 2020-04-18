@@ -3,7 +3,7 @@ from random import random
 
 from engine.graphics.entity import Entity
 
-from ..unit_logic.move_to import MoveTo
+from ..unit_logic.tasks import MoveTo
 
 
 class Unit(Entity):

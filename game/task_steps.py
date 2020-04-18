@@ -1,4 +1,4 @@
 from .task_step import TaskStep
 
-FARM = TaskStep("Do farming", [])
-GO_HOME = TaskStep("Go home", [])
+TASK_NOT_STARTED = TaskStep("Task not started", [])
+TASK_COMPLETED = TaskStep("Task completed", [])

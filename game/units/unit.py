@@ -19,17 +19,20 @@ class Unit(Entity):
         self.speed = 0.2
         self.animationSpeed = 10.0
         self.task = None
+        self.taskManager = GAME.taskManager
 
     def tick(self, t):
         if self.task:
             if self.task.act():
-                self.task = None
+                if self.taskManager.add_to_pool(self):
+                    print("No task to act on")
+                    self.task = None
         else:
             target = (
-                self.float_pos[0] + random() * 100 - random() * 100,
-                self.float_pos[1] + random() * 100 - random() * 100,
+                self.float_pos[0] + random() * 1000 - random() * 100,
+                self.float_pos[1] + random() * 1000 - random() * 100,
             )
-            self.task = MoveTo(self, target)
+            self.task = MoveTo(target, self)
         super().tick(t)
 
     def assign(self, task, complete_task):

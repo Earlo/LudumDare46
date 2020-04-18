@@ -10,6 +10,10 @@ class Task:
         self.current_substep_index = 0
         self.assignee = assignee
 
+    def assign(self, assignee):
+        self.assignee = assignee
+        assignee.task = self
+
     def has_started(self):
         return self.current_step_index > 0
 
@@ -25,7 +29,6 @@ class Task:
         return self.current_step()
 
     def act(self):
-        print(self.current_step().title)
         step_completed = self.current_step().act(self.assignee, self)
         if step_completed:
             next_step = self.next_step()

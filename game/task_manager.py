@@ -3,35 +3,45 @@ from .task import Task
 
 class TaskManager():
 
-    def __init__(self, GAME, tasks=[]):
-        self.tasks = tasks
+    def __init__(self, GAME):
+        self.active_tasks = []
         self.game = GAME
+        self.assignee_pool = []
+        self.task_buffer = []
 
-    def create_tasks(self, task_param_objects):
-        tasks = []
-        for task_params in task_param_objects:
-            task = self.create_task(task_params)
-            tasks.append(task)
-        return tasks
+    def add_tasks(self, tasks):
+        print("Adding tasks")
+        for task in tasks:
+            self.assign_task(task)
+            return task
+        print("Added tasks: " + str(len(self.active_tasks) + " " + str(len(self.task_buffer))))
 
-    def create_task(self, task_params):
-        task = Task(task_params)
-        self.tasks.append(task)
-        return task
+    def get_active_tasks(self):
+        return self.active_tasks
 
-    def get_tasks(self):
-        return self.tasks
+    def get_task_buffer(self):
+        return self.task_buffer
 
-    def get_assignees(self):
-        return self.game.entities
+    def add_to_pool(self, *units):
+        for unit in units:
+            if len(self.task_buffer):
+                self.assign_task(self.task_buffer.pop(), unit)
+                return False
+            else:
+                self.assignee_pool.append(unit)
+                #print("Added assignee to pool, no tasks " + str(len(self.task_buffer)))
+                return True
 
-    def assign_task(self, task, assignee):
-        if task not in self.tasks:
-            return False
-
-        def complete_task():
-            task.complete()
-            self.tasks.remove(task)
-
-        assignee.assign(task, complete_task)
+    def assign_task(self, task, assignee=None):
+        print("Assigning task")
+        if not assignee:
+            if len(self.assignee_pool):
+                assignee = self.assignee_pool.pop()
+                print("Found assignee from pool!")
+            else:
+                print("No assignee, adding to buffer")
+                self.task_buffer.append(task)
+                return False
+        task.assign(assignee)
+        print("Task assigned!")
         return True

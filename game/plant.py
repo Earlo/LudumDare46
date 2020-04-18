@@ -21,6 +21,14 @@ class Plant(Entity):
                 self.growth = 0
                 self.stage += 1
         
+    def harvest(self):
+        if self.stage == 3:
+            self.stage = 0
+            self.growth = 0 
+            return True
+        else:
+            return False
+            
     def tick(self, t):
         self.grow_plant()
         super().tick(t)

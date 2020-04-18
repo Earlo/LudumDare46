@@ -1,6 +1,7 @@
 from engine.metaGame import MetaGame
 from .level import ExampleLevel
 from .unit import Unit
+from .plant import Plant
 
 from .ui.screens import testGui, noGui, taskManagerGui
 from engine.constants import SWIDTH, SHEIGTH
@@ -26,6 +27,8 @@ class Game(MetaGame):
 
         self.entities.append(Unit(self, (500.0, 500.0)))
         self.entities.append(Unit(self, (0.0, 200.0)))
+        self.entities.append(Plant(self, (0.0, 0.0), 0))
+
         self.level = ExampleLevel(self)
 
         self.load_gui(noGui(self))

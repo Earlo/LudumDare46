@@ -16,8 +16,7 @@ class Game(MetaGame):
 
         # TODO make testgui less test. A single object with members as presets
 
-        self.load_gui(testGui(self))
-        
+        self.load_gui(testGui(self)) 
 
     def tick(self):
         super().tick()
@@ -29,11 +28,16 @@ class Game(MetaGame):
         self.entities.append(Unit(self, (0.0, 200.0), (0.01, 0.01)))
         self.level = ExampleLevel(self)
 
-        self.load_gui(noGui(self))
+        self.tasks = [
+            Task("Testitaski", [FARM]),
+            Task("Toinen Testitaski", [GO_HOME])
+        ]
+
+        self.load_gui(taskManagerGui(self, self.tasks))
 
     def TEST_TASK_MANAGER(self):
-        self.tasks = [
+        tasks = [
                 Task("Testitaski", [FARM]),
                 Task("Toinen Testitaski", [GO_HOME])
             ]
-        self.load_gui(taskManagerGui(self, self.tasks))
+        self.load_gui(taskManagerGui(self, tasks))

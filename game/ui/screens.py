@@ -14,7 +14,7 @@ def testGui(GAME):
     return ui
 
 
-def taskManagerGui(GAME, tasks):
+def taskManagerGui(GAME, tasks=None):
     def task_to_card(task, index):
         card_height = 0.02
         card_margin = 0.02
@@ -23,7 +23,7 @@ def taskManagerGui(GAME, tasks):
 
     task_cards = [
         task_to_card(t[1], t[0])
-        for t in enumerate(tasks)
+        for t in enumerate(tasks or GAME.tasks or [])
     ]
     ui = [
         *task_cards

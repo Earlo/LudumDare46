@@ -25,7 +25,7 @@ class Unit(Entity):
                 self.float_pos[0] + random() * 100 - random() * 100,
                 self.float_pos[1] + random() * 100 - random() * 100,
             )
-            print(target)
+            # print(target)
             self.task = MoveTo(self, target)
             # when idle, select a nearby and wander there
             pass

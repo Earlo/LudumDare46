@@ -1,10 +1,11 @@
-from task import Task
+from .task import Task
 
 
 class TaskManager():
 
-    def __init__(self, tasks=[]):
+    def __init__(self, GAME, tasks=[]):
         self.tasks = tasks
+        self.game = GAME
 
     def create_tasks(self, task_param_objects):
         tasks = []
@@ -20,6 +21,9 @@ class TaskManager():
 
     def get_tasks(self):
         return self.tasks
+
+    def get_assignees(self):
+        return self.game.entities
 
     def assign_task(self, task, assignee):
         if task not in self.tasks:

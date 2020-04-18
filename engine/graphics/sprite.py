@@ -7,6 +7,7 @@ class Sprite(pygame.Rect):
     # example
     frames = ["frog", "frog2"]
     graphic_layer = 0
+    animationspeed = 0
     graphicalAssetHandler = GraphicalAssetHandler()
 
     def __init__(self, parent, asset_type):

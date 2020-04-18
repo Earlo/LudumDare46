@@ -1,7 +1,7 @@
 from engine.metaGame import MetaGame
 from .level import ExampleLevel
-from .unit import Unit
-from .plant import Plant
+from .units.unit import Unit
+from .units.plant import Plant
 
 from .ui.screens import testGui, noGui, taskManagerGui
 from engine.constants import SWIDTH, SHEIGTH

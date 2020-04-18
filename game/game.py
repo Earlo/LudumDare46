@@ -2,6 +2,7 @@ from engine.metaGame import MetaGame
 from .level import ExampleLevel
 from .units.unit import Unit
 from .units.plant import Plant
+from .buildings.home import Home
 
 from .ui.screens import testGui, noGui, taskManagerGui
 from engine.constants import SWIDTH, SHEIGTH
@@ -13,7 +14,8 @@ from .unit_logic.task_steps import FARM, GO_HOME
 class Game(MetaGame):
     def __init__(self, ENGINE):
         super().__init__(ENGINE)
-
+        # resource array 
+        self.resources = {'olives': 0}
         self.add_guiport("GUI", SWIDTH, SHEIGTH)
         self.task_manager = TaskManager(self)
 
@@ -30,7 +32,7 @@ class Game(MetaGame):
         self.entities.append(Unit(self, (500.0, 500.0)))
         self.entities.append(Unit(self, (0.0, 200.0)))
         self.entities.append(Plant(self, (0.0, 0.0), 0))
-
+        self.entities.append(Home(self, (100.0, 100.0)))
         self.level = ExampleLevel(self)
 
         self.tasks = [Task("Testitaski", [FARM]), Task("Toinen Testitaski", [GO_HOME])]

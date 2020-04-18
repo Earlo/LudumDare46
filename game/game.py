@@ -2,8 +2,10 @@ from engine.metaGame import MetaGame
 from .level import ExampleLevel
 from .unit import Unit
 
-from .ui.screens import testGui, noGui
+from .ui.screens import testGui, noGui, taskManagerGui
 from engine.constants import SWIDTH, SHEIGTH
+from .task import Task
+from .task_steps import FARM, GO_HOME
 
 
 class Game(MetaGame):
@@ -13,7 +15,9 @@ class Game(MetaGame):
         self.add_guiport("GUI", SWIDTH, SHEIGTH)
 
         # TODO make testgui less test. A single object with members as presets
+
         self.load_gui(testGui(self))
+        
 
     def tick(self):
         super().tick()
@@ -26,3 +30,10 @@ class Game(MetaGame):
         self.level = ExampleLevel(self)
 
         self.load_gui(noGui(self))
+
+    def TEST_TASK_MANAGER(self):
+        self.tasks = [
+                Task("Testitaski", [FARM]),
+                Task("Toinen Testitaski", [GO_HOME])
+            ]
+        self.load_gui(taskManagerGui(self, self.tasks))

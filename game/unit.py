@@ -11,3 +11,7 @@ class Unit(Entity):
 
     def tick(self, t):
         super().tick(t)
+
+    def assign(self, task, complete_task):
+        self.task = task
+        self.complete_task = complete_task

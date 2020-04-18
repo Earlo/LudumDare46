@@ -1,8 +1,7 @@
 from .task_steps import TASK_NOT_STARTED, TASK_COMPLETED
 
 
-class Task():
-
+class Task:
     def __init__(self, title, steps):
         self.title = title
         self.completed = False
@@ -15,10 +14,13 @@ class Task():
 
     def get_steps(self):
         return self.steps
-        
+
     def get_next_steps(self):
-        next_steps = self.steps[self.current_step_index+1:] \
-            if self.has_started() else self.steps
+        next_steps = (
+            self.steps[self.current_step_index + 1 :]
+            if self.has_started()
+            else self.steps
+        )
 
         return next_steps
 

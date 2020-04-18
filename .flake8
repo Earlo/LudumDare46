@@ -1,6 +1,1 @@
 [flake8]
-ignore =
-    # This project is indented with two spaces
-    E111,
-    # E111 but for comments
-    E114,

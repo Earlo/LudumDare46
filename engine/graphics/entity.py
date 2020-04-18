@@ -26,4 +26,4 @@ class Entity(Sprite):
 
     @property
     def age(self):
-        return self.updated_at - self.created_at
+        return pygame.time.get_ticks() - self.created_at

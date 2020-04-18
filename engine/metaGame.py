@@ -16,6 +16,7 @@ class MetaGame(ABC):
         time = self._ENGINE.clock.get_time()
         for e in self.entities:
             e.tick(time)
+        self._ViewportHandler.viewPorts["GUI"].refresh_GUI()
 
     def load_gui(self, gui):
         self._ViewportHandler.viewPorts["GUI"].load_GUI(gui)

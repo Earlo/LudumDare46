@@ -1,10 +1,11 @@
 from ..singleton import Singleton
 from .button import Button
+from .card import Card
 
 
 class GuiLibrary(metaclass=Singleton):
     def __init__(self):
-        self._wDict = {"BUTTON": Button}
+        self._wDict = {"BUTTON": Button, "CARD": Card}
         super().__init__()
 
     def __getitem__(self, key):

@@ -31,11 +31,7 @@ class Game(MetaGame):
 
         self.level = ExampleLevel(self)
 
-        self.tasks = [
-            Task("Testitaski", [FARM]),
-            Task("Toinen Testitaski", [GO_HOME])
-        ]
-
+        self.tasks = [Task("Testitaski", [FARM]), Task("Toinen Testitaski", [GO_HOME])]
         self.load_gui(taskManagerGui(self, self.tasks))
 
     def TEST_TASK_MANAGER(self):

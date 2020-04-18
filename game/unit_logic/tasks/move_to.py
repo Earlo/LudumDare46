@@ -1,4 +1,5 @@
 from math import atan2, sqrt
+from .task import Task
 
 
 # Todo some task superclass?

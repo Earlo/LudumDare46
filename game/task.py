@@ -1,11 +1,12 @@
-from .task_steps import TASK_NOT_STARTED
+from .task_steps import TASK_NOT_STARTED, TASK_COMPLETED
+
 
 class Task():
 
     def __init__(self, title, steps):
         self.title = title
         self.completed = False
-        self.steps = steps
+        self.steps = [TASK_NOT_STARTED, *steps, TASK_COMPLETED]
         self.current_step_index = -1
         self.assignee = None
 

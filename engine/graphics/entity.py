@@ -18,7 +18,7 @@ class Entity(Sprite):
         movement = [x * self.timeInterval for x in self.velocity]
         self.float_pos = tuple(map(sum, zip(self.float_pos, movement)))
         self.topleft = self.float_pos
-
+        self.updated_at = pygame.time.get_ticks()
         self.draw()
 
     def _real_time_tick(self):
@@ -26,4 +26,4 @@ class Entity(Sprite):
 
     @property
     def age(self):
-        return pygame.time.get_ticks() - self.created_at
+        return self.updated_at() - self.created_at

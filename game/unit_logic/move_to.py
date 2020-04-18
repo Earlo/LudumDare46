@@ -1,4 +1,4 @@
-from math import atan2
+from math import atan2, sqrt
 
 
 # Todo some task superclass?
@@ -8,8 +8,13 @@ class MoveTo:
         self.target = target
 
     def act(self):
-        print(self.entity.float_pos, "to", self.target)
-        dx = self.entity.float_pos[0] - self.target[0]
-        dy = self.entity.float_pos[1] - self.target[1]
-        self.entity.direction = atan2(dy, dx)
-        # TODO add check if completed
+
+        dx = self.target[0] - self.entity.float_pos[0]
+        dy = self.target[1] - self.entity.float_pos[1]
+        new = atan2(dy, dx)
+        self.entity.direction = new
+        if dx + dy < self.entity.speed:
+            # move to exact pos
+
+            return True
+        return False

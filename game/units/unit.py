@@ -1,4 +1,4 @@
-from math import sin, cos
+from math import sin, cos, pi
 from random import random
 
 from engine.graphics.entity import Entity
@@ -12,17 +12,18 @@ class Unit(Entity):
 
     def __init__(self, GAME, pos):
         super().__init__(pos)
-        self.direction = 0
+        self.direction = pi
         self.speed = 0.2
         self.task = None
 
     def tick(self, t):
         if self.task:
-            self.task.act()
+            if self.task.act():
+                self.task = None
         else:
             target = (
-                self.float_pos[0] + random() * 100,
-                self.float_pos[1] + random() * 100,
+                self.float_pos[0] + random() * 100 - random() * 100,
+                self.float_pos[1] + random() * 100 - random() * 100,
             )
             print(target)
             self.task = MoveTo(self, target)

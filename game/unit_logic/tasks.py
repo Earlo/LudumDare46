@@ -1,9 +1,9 @@
-from task import Task
-from unit_logic import task_steps
+from ..task import Task
+from ..unit_logic import task_steps
 
 
 class MoveTo(Task):
-    def __init__(self, target):
+    def __init__(self, assignee, target):
         title = "Moving to " + str(target)
         steps = [task_steps.MoveTo(target)]
-        super().__init__(title, steps)
+        super().__init__(title, steps, assignee)

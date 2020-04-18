@@ -2,13 +2,13 @@ from .task_steps import TASK_NOT_STARTED, TASK_COMPLETED
 
 
 class Task:
-    def __init__(self, title, steps=[]):
+    def __init__(self, title, steps=[], assignee=None):
         self.title = title
         self.completed = False
         self.steps = [TASK_NOT_STARTED, *steps, TASK_COMPLETED]
         self.current_step_index = 0
         self.current_substep_index = 0
-        self.assignee = None
+        self.assignee = assignee
 
     def has_started(self):
         return self.current_step_index > 0
@@ -25,9 +25,10 @@ class Task:
         return self.current_step()
 
     def act(self):
-        step_completed = self.current_step().act(self, self.assignee)
+        print(self.current_step().title)
+        step_completed = self.current_step().act(self.assignee, self)
         if step_completed:
-            next_step = self.next.step()
+            next_step = self.next_step()
             if next_step == TASK_COMPLETED:
                 return True
         return False

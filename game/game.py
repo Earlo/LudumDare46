@@ -7,7 +7,7 @@ from .ui.screens import testGui, noGui, taskManagerGui
 from engine.constants import SWIDTH, SHEIGTH
 from .task_manager import TaskManager
 from .task import Task
-from .task_steps import FARM, GO_HOME
+from .unit_logic.task_steps import FARM, GO_HOME
 
 
 class Game(MetaGame):

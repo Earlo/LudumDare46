@@ -25,6 +25,7 @@ class Engine(metaclass=Singleton):
 
         # TODO mouse object
         self.mouse = [pygame.mouse.get_pos(), False, [0, 0], None]
+        self.keys = set()
 
         self.GAME = Game(self)
 
@@ -34,6 +35,7 @@ class Engine(metaclass=Singleton):
             self.mouse[1] = False
             # pygame.event.pump()
             for event in pygame.event.get():
+
                 if event.type == pygame.QUIT:
                     self.done = True
                 elif event.type in [pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP]:
@@ -41,7 +43,11 @@ class Engine(metaclass=Singleton):
                 # TODO make custome event handler
                 elif event.type == FUNCTIONCALLEVENT:
                     self.call_one_time_function(event)
-
+                elif event.type == pygame.KEYUP:
+                    print(event)
+                    self.keys.remove(event.key)
+                elif event.type == pygame.KEYDOWN:
+                    self.keys.add(event.key)
             self.game_tick()
             self.viewportHandler.update_display()
 

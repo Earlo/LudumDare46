@@ -23,7 +23,6 @@ class Unit(Entity):
     def tick(self, t):
         if self.task:
             if self.task.act():
-                print("DONE!")
                 completed_task = self.task
                 self.task = None
                 self.taskManager.get_task(self, completed_task)

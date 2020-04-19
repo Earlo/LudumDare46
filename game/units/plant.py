@@ -3,7 +3,8 @@ from engine.graphics.entity import Entity
 
 class Plant(Entity):
     stage = 0
-    sprite = ["frog"]  # placeholder
+    daframes = ["crop_0", "crop_1", "crop_2", "crop_3"]
+    #sprite = frames[0]
 
     def __init__(self, GAME, pos, stg):
         super().__init__(pos)
@@ -11,6 +12,7 @@ class Plant(Entity):
         self.stage = stg
         self.growth = 0
         self.clock = GAME._ENGINE.clock
+        self.animationSpeed = 10.0
         # self.growth_speed = 1.0 possible feature?
 
     def grow_plant(self):
@@ -19,7 +21,12 @@ class Plant(Entity):
                 self.growth += self.clock.get_time()
             else:
                 self.growth = 0
+                print("Plant grew a stage!")
                 self.stage += 1
+
+    @property
+    def frames(self):
+        return [Plant.daframes[self.stage]]
 
     def harvest(self):
         if self.stage == 3:

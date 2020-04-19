@@ -34,6 +34,17 @@ class PlantStep(TaskStep):
         return True
 
 
+class HarvestStep(TaskStep):
+    def __init__(self, target, *args, **kwargs):
+        title = "Planting"
+        super().__init__(title)
+        self.target = target
+
+    def act(self, assignee, task):
+        self.plant.harvest()
+        return True
+
+
 
 FARM = TaskStep("Do farming", [])
 GO_HOME = TaskStep("Go home", [])

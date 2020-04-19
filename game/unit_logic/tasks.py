@@ -14,3 +14,9 @@ class PlantOlives(Task):
         title = "Plant olives at " + str(target)
         steps = [task_steps.MoveTo(target), task_steps.PlantStep(target)]
         super().__init__(title, steps, assignee)
+
+class HarvestOlives(Task):
+    def __init__(self, target, plant, assignee=None):
+        title = "Harvest olives at " + str(target)
+        steps = [task_steps.MoveTo(target), task_steps.HarvestStep(plant)]
+        super().__init__(title, steps, assignee)

@@ -32,6 +32,10 @@ class CameraPort(ViewPort):
     def y(self):
         return self.camera.y
 
+    @property
+    def offset(self):
+        return [self.x, self.y]
+
     def move_camera(self, x, y):
         self.previous = self.camera.copy()
         self.camera.move_ip(x, y)

@@ -1,5 +1,4 @@
-class TaskStep():
-
+class TaskStep:
     def __init__(self, title, substeps=[]):
         self.title = title
         self.substeps = substeps
@@ -14,6 +13,3 @@ class TaskStep():
             # No default step behaviour,
             # override method in subclass to implement behaviour
         return False
-
-
-    

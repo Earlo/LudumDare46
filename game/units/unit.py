@@ -12,24 +12,21 @@ class Unit(Entity):
     walkFwdFrames = ["oliveFwd0", "oliveFwd1", "oliveFwd2"]
     walkBackFrames = ["oliveBack0", "oliveBack1", "oliveBack2"]
 
-    direction = 0
-
     def __init__(self, GAME, pos):
         super().__init__(pos)
         self.speed = 0.2
         self.animationSpeed = 10.0
-        self.task = None
+        self.task = MoveTo((0, 0), self)
+        self.taskManager = GAME.taskManager
 
     def tick(self, t):
         if self.task:
             if self.task.act():
+                print("DONE!")
                 self.task = None
         else:
-            target = (
-                self.float_pos[0] + random() * 100 - random() * 100,
-                self.float_pos[1] + random() * 100 - random() * 100,
-            )
-            self.task = MoveTo(self, target)
+            self.direction += 0.05
+            self.taskManager.get_task(self)
         super().tick(t)
 
     def assign(self, task, complete_task):
@@ -38,18 +35,20 @@ class Unit(Entity):
 
     @property
     def frames(self):
-        if -pi / 4 <= self.direction < pi / 4:
+        if 0 <= self.direction < 1 * pi / 4:
             return self.walkingframes
-        elif pi / 4 <= self.direction < 3 * pi / 4:
+        elif 1 * pi / 4 <= self.direction < 3 * pi / 4:
             return self.walkFwdFrames
-        elif 3 * pi / 4 <= self.direction < 6 * pi / 4:
+        elif 3 * pi / 4 <= self.direction < 5 * pi / 4:
             return self.walkingframes
-        else:
+        elif 5 * pi / 4 <= self.direction < 7 * pi / 4:
             return self.walkBackFrames
+        else:
+            return self.walkingframes
 
     @property
     def frameInverted(self):
-        return pi / 2 >= self.direction > pi / 2
+        return not (self.direction < 1 / 4 * pi or self.direction > 7 / 4 * pi)
 
     @property
     def velocity(self):

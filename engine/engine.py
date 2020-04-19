@@ -49,7 +49,6 @@ class Engine(metaclass=Singleton):
             pygame.display.set_caption("FPS: {}".format(self.clock.get_fps()))
 
     def mousehandler(self, event):
-        # TODO make mousehandler
         if event.button == 1:
             self.mouse[1] = True
             for obj in self.viewportHandler.viewPorts["GUI"].GUI:

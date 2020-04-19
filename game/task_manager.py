@@ -1,37 +1,37 @@
 from .task import Task
 
 
-class TaskManager():
+class TaskManager:
+    def __init__(self, GAME):
+        self.assigneePool = []
+        self.taskBuffer = []
+        self.activeTasks = []
 
-    def __init__(self, GAME, tasks=[]):
-        self.tasks = tasks
         self.game = GAME
 
-    def create_tasks(self, task_param_objects):
-        tasks = []
-        for task_params in task_param_objects:
-            task = self.create_task(task_params)
-            tasks.append(task)
-        return tasks
+    def add_task(self, task):
+        self.taskBuffer.append(task)
 
-    def create_task(self, task_params):
-        task = Task(task_params)
-        self.tasks.append(task)
-        return task
+    def add_to_pool(self, unit):
+        self.assigneePool.append(unit)
 
-    def get_tasks(self):
-        return self.tasks
+    def get_task(self, assignee):
+        if len(self.taskBuffer) > 0:
+            nextTask = self.taskBuffer.pop()
+            self.assign_task(nextTask, assignee)
+            # not used?
+            # self.activeTasks.append(nextTask)
 
-    def get_assignees(self):
-        return self.game.entities
-
-    def assign_task(self, task, assignee):
-        if task not in self.tasks:
-            return False
-
-        def complete_task():
-            task.complete()
-            self.tasks.remove(task)
-
-        assignee.assign(task, complete_task)
+    def assign_task(self, task, assignee=None):
+        print("Assigning task")
+        if not assignee:
+            if len(self.assigneePool):
+                assignee = self.assigneePool.pop()
+                print("Found assignee from pool!")
+            else:
+                print("No assignee, adding to buffer")
+                self.taskBuffer.append(task)
+                return False
+        task.assign(assignee)
+        print("Task assigned!")
         return True

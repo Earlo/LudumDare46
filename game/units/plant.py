@@ -1,5 +1,9 @@
 from engine.graphics.entity import Entity
 
+from ..unit_logic import tasks
+
+from ..units import unit
+
 
 class Plant(Entity):
     stage = 0
@@ -13,6 +17,8 @@ class Plant(Entity):
         self.growth = 0
         self.clock = GAME._ENGINE.clock
         self.animationSpeed = 10.0
+        self.taskManager = GAME.taskManager
+        self.game = GAME
         # self.growth_speed = 1.0 possible feature?
 
     def grow_plant(self):
@@ -23,6 +29,9 @@ class Plant(Entity):
                 self.growth = 0
                 print("Plant grew a stage!")
                 self.stage += 1
+                if self.stage == 3:
+                    self.taskManager.assign_task(tasks.HarvestOlives(self))
+                    
 
     @property
     def frames(self):
@@ -32,6 +41,7 @@ class Plant(Entity):
         if self.stage == 3:
             self.stage = 0
             self.growth = 0
+            self.game.entities.append(unit.Unit(self.game, self.topleft))
             return True
         else:
             return False

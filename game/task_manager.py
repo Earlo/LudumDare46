@@ -10,10 +10,6 @@ class TaskManager:
 
         self.game = GAME
 
-    def add_task(self, task):
-        self.taskBuffer.append(task)
-        self.update_gui()
-
     def add_to_pool(self, unit):
         self.assigneePool.append(unit)
 
@@ -24,8 +20,9 @@ class TaskManager:
         if len(self.taskBuffer) > 0:
             nextTask = self.taskBuffer.pop(0)
             self.assign_task(nextTask, assignee)
-            self.activeTasks.append(nextTask)
             self.update_gui()
+        elif assignee not in self.assigneePool:
+            self.assigneePool.append(assignee)
 
     def assign_task(self, task, assignee=None):
         if not assignee:
@@ -36,6 +33,7 @@ class TaskManager:
                 self.update_gui()
                 return False
         task.assign(assignee)
+        self.activeTasks.append(task)
         self.update_gui()
         return True
 

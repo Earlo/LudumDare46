@@ -3,7 +3,7 @@ from random import random
 
 from engine.graphics.entity import Entity
 
-from ..unit_logic.tasks import MoveTo
+from ..unit_logic.tasks import MoveTo, HarvestOlives
 
 
 class Unit(Entity):

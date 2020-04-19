@@ -35,10 +35,10 @@ class PlantStep(TaskStep):
 
 
 class HarvestStep(TaskStep):
-    def __init__(self, target, *args, **kwargs):
+    def __init__(self, plant, *args, **kwargs):
         title = "Planting"
         super().__init__(title)
-        self.target = target
+        self.plant = plant
 
     def act(self, assignee, task):
         self.plant.harvest()

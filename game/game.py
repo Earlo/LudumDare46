@@ -33,7 +33,7 @@ class Game(MetaGame):
         # Mouse was clicked
         if self.hasStarted:
             if self._ENGINE.mouse[1]:
-                self.taskManager.add_task(
+                self.taskManager.assign_task(
                     PlantOlives(
                         [
                             x + y 
@@ -53,10 +53,9 @@ class Game(MetaGame):
     def START(self):
         self.add_cameraport("GAME", SWIDTH, SHEIGTH)
 
-        units = [Unit(self, (0.0, 200.0)), Unit(self, (0.0, 200.0)), Unit(self, (0.0, 200.0))]
+        units = [Unit(self, (0.0, 200.0)), Unit(self, (0.0, 300.0)), Unit(self, (0.0, 400.0))]
         for unit in units:
             self.entities.append(unit)
-            self.taskManager.add_to_pool(unit)
         self.entities.append(Plant(self, (0.0, 0.0), 0))
         self.entities.append(Home(self, (100.0, 100.0)))
 

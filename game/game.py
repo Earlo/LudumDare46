@@ -21,17 +21,32 @@ class Game(MetaGame):
         self.taskManager = TaskManager(self)
 
         # TODO make testgui less test. A single object with members as presets
-
+        self.keyActions = {
+            97: [self.move_camera, (-1, 0)],
+            119: [self.move_camera, (0, -1)],
+            100: [self.move_camera, (1, 0)],
+            115: [self.move_camera, (0, 1)],
+        }
         self.load_gui(testGui(self))
 
     def tick(self):
         # Mouse was clicked
-        if self.hasStarted and self._ENGINE.mouse[1]:
-            self.taskManager.add_task(
-                MoveTo(
-                    [x + y for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)]
+        if self.hasStarted:
+            if self._ENGINE.mouse[1]:
+                self.taskManager.add_task(
+                    MoveTo(
+                        [
+                            x + y
+                            for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)
+                        ]
+                    )
                 )
-            )
+            for k in self._ENGINE.keys:
+                print(" on", k)
+                try:
+                    self.keyActions[k][0](*self.keyActions[k][1])
+                except:
+                    pass
 
         super().tick()
 

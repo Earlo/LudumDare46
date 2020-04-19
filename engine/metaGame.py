@@ -33,3 +33,6 @@ class MetaGame(ABC):
     @property
     def camera_offset(self):
         return self._ViewportHandler.viewPorts["GAME"].offset
+
+    def move_camera(self, x, y):
+        return self._ViewportHandler.viewPorts["GAME"].move_camera(x, y)

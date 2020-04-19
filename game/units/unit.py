@@ -23,15 +23,13 @@ class Unit(Entity):
         if self.task:
             if self.task.act():
                 print("DONE!")
+                completed_task = self.task
                 self.task = None
+                self.taskManager.get_task(self, completed_task)
         else:
             self.direction += 0.05
             self.taskManager.get_task(self)
         super().tick(t)
-
-    def assign(self, task, complete_task):
-        self.task = task
-        self.complete_task = complete_task
 
     @property
     def frames(self):

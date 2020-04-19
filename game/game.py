@@ -26,12 +26,18 @@ class Game(MetaGame):
 
     def tick(self):
         # Mouse was clicked
-        if self.hasStarted and self._ENGINE.mouse[1]:
-            self.taskManager.add_task(
-                MoveTo(
-                    [x + y for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)]
+        if self.hasStarted:
+            if self._ENGINE.mouse[1]:
+                self.taskManager.add_task(
+                    MoveTo(
+                        [x + y for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)]
+                    )
                 )
-            )
+            self.load_gui(taskManagerGui(
+                self,
+                self.taskManager.activeTasks, 
+                self.taskManager.taskBuffer
+                ))
 
         super().tick()
 

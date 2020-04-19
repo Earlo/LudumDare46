@@ -44,7 +44,7 @@ class Game(MetaGame):
     def START(self):
         self.add_cameraport("GAME", SWIDTH, SHEIGTH)
 
-        units = [Unit(self, (0.0, 200.0))]
+        units = [Unit(self, (0.0, 200.0))] * 2
         for unit in units:
             self.entities.append(unit)
             self.taskManager.add_to_pool(unit)

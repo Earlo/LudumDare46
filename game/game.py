@@ -25,35 +25,29 @@ class Game(MetaGame):
         self.load_gui(testGui(self))
 
     def tick(self):
+        # Mouse was clicked
+        if self.hasStarted and self._ENGINE.mouse[1]:
+            self.taskManager.add_task(
+                MoveTo(
+                    [x + y for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)]
+                )
+            )
+
         super().tick()
 
     def START(self):
         self.add_cameraport("GAME", SWIDTH, SHEIGTH)
 
-        units = [Unit(self, (500.0, 500.0)), Unit(self, (0.0, 200.0))]
-        tasks = [
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-            MoveTo([100, 100]),
-        ]
+        units = [Unit(self, (0.0, 200.0))]
         for unit in units:
             self.entities.append(unit)
-        for task in tasks:
-            self.taskManager.assign_task(task)
+            self.taskManager.add_to_pool(unit)
         self.entities.append(Plant(self, (0.0, 0.0), 0))
         self.entities.append(Home(self, (100.0, 100.0)))
-        self.taskManager.add_to_pool(*units)
 
         self.level = ExampleLevel(self)
-
-        self.load_gui(taskManagerGui(self, self.taskManager.active_tasks))
+        self.load_gui(taskManagerGui(self, self.taskManager.activeTasks))
+        self.hasStarted = True
 
     def TEST_TASK_MANAGER(self):
         self.tasks = [Task("Testitaski", [FARM]), Task("Toinen Testitaski", [GO_HOME])]

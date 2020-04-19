@@ -9,7 +9,7 @@ class MetaGame(ABC):
     def __init__(self, ENGINE):
         self._ENGINE = ENGINE
         self._ViewportHandler = ViewportHandler()
-
+        self.hasStarted = False
         self.entities = []
 
     def tick(self):
@@ -29,3 +29,7 @@ class MetaGame(ABC):
 
     def add_cameraport(self, name, x, y):
         self._ViewportHandler.viewPorts[name] = CameraPort(x, y)
+
+    @property
+    def camera_offset(self):
+        return self._ViewportHandler.viewPorts["GAME"].offset

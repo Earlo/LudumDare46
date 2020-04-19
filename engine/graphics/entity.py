@@ -1,10 +1,13 @@
 import pygame
+from math import pi
 
 from .sprite import Sprite
 from ..window.viewportHandler import ViewportHandler
 
 
 class Entity(Sprite):
+    _direction = 0
+
     def __init__(self, pos, time=pygame.time.get_ticks()):
         super().__init__(ViewportHandler().viewPorts["GAME"], "sprites")
         self.float_pos = pos
@@ -23,6 +26,14 @@ class Entity(Sprite):
 
     def _real_time_tick(self):
         Entity.tick(self, pygame.time.get_ticks())
+
+    @property
+    def direction(self):
+        return self._direction
+
+    @direction.setter
+    def direction(self, newDirection):
+        self._direction = newDirection % (2 * pi)
 
     @property
     def age(self):

@@ -18,6 +18,7 @@ class Unit(Entity):
         self.animationSpeed = 10.0
         self.task = MoveTo((0, 0), self)
         self.taskManager = GAME.taskManager
+        self.game = GAME
 
     def tick(self, t):
         if self.task:

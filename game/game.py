@@ -9,7 +9,7 @@ from engine.constants import SWIDTH, SHEIGTH
 from .task_manager import TaskManager
 from .task import Task
 from .unit_logic.task_steps import FARM, GO_HOME
-from .unit_logic.tasks import MoveTo
+from .unit_logic.tasks import MoveTo, PlantOlives
 
 
 class Game(MetaGame):
@@ -34,9 +34,9 @@ class Game(MetaGame):
         if self.hasStarted:
             if self._ENGINE.mouse[1]:
                 self.taskManager.add_task(
-                    MoveTo(
+                    PlantOlives(
                         [
-                            x + y
+                            x + y 
                             for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)
                         ]
                     )

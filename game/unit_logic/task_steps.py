@@ -1,4 +1,5 @@
 from ..task_step import TaskStep
+from ..units.plant import Plant
 
 from math import atan2, sqrt
 
@@ -19,6 +20,19 @@ class MoveTo(TaskStep):
             # move to exact pos
             return True
         return False
+
+
+class PlantStep(TaskStep):
+    def __init__(self, target, *args, **kwargs):
+        title = "Planting"
+        super().__init__(title)
+        self.target = target
+
+    def act(self, assignee, task):
+        plant = Plant(assignee.game, self.target, 0)
+        assignee.game.entities.append(plant)
+        return True
+
 
 
 FARM = TaskStep("Do farming", [])

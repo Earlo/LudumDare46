@@ -15,7 +15,7 @@ class Task:
 
     def act(self):
         if self.steps[0].act(self.assignee, self):
-            self.steps.pop()
+            self.steps.pop(0)
             if len(self.steps) == 0:
                 return True
         return False

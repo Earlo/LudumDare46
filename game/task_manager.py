@@ -1,4 +1,5 @@
 from .task import Task
+from .ui.screens import taskManagerGui
 
 
 class TaskManager:
@@ -11,6 +12,7 @@ class TaskManager:
 
     def add_task(self, task):
         self.taskBuffer.append(task)
+        self.update_gui()
 
     def add_to_pool(self, unit):
         self.assigneePool.append(unit)
@@ -18,21 +20,28 @@ class TaskManager:
     def get_task(self, assignee, completed_task=None):
         if completed_task and completed_task in self.activeTasks:
             self.activeTasks.remove(completed_task)
+            self.update_gui()
         if len(self.taskBuffer) > 0:
             nextTask = self.taskBuffer.pop(0)
             self.assign_task(nextTask, assignee)
             self.activeTasks.append(nextTask)
+            self.update_gui()
 
     def assign_task(self, task, assignee=None):
-        print("Assigning task")
         if not assignee:
             if len(self.assigneePool):
                 assignee = self.assigneePool.pop(0)
-                print("Found assignee from pool!")
             else:
-                print("No assignee, adding to buffer")
                 self.taskBuffer.append(task)
+                self.update_gui()
                 return False
         task.assign(assignee)
-        print("Task assigned!")
+        self.update_gui()
         return True
+
+    def update_gui(self):
+        self.game.load_gui(taskManagerGui(
+                self.game,
+                self.activeTasks,
+                self.taskBuffer
+            ))

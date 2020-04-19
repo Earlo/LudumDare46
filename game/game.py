@@ -33,18 +33,13 @@ class Game(MetaGame):
                         [x + y for x, y in zip(self._ENGINE.mouse[0], self.camera_offset)]
                     )
                 )
-            self.load_gui(taskManagerGui(
-                self,
-                self.taskManager.activeTasks, 
-                self.taskManager.taskBuffer
-                ))
 
         super().tick()
 
     def START(self):
         self.add_cameraport("GAME", SWIDTH, SHEIGTH)
 
-        units = [Unit(self, (0.0, 200.0))] * 2
+        units = [Unit(self, (0.0, 200.0)), Unit(self, (0.0, 200.0)), Unit(self, (0.0, 200.0))]
         for unit in units:
             self.entities.append(unit)
             self.taskManager.add_to_pool(unit)

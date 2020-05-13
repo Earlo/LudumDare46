@@ -24,3 +24,24 @@ class HarvestOlives(Task):
             task_steps.HarvestStep(plant)
             ]
         super().__init__(title, steps, assignee)
+
+
+class StoreOlives(Task):
+    def __init__(self, storage, assignee=None):
+        title = "Store olives at " + str(storage.topleft)
+        steps = [
+            task_steps.MoveTo(storage.topleft),
+            task_steps.StoreStep(storage)
+            ]
+        super().__init__(title, steps, assignee)
+
+class HarvesAndStore(Task):
+    def __init__(self, plant, storage, assignee=None):
+        title = "Harvest and store olives"
+        steps = [
+            task_steps.MoveTo(plant.topleft),
+            task_steps.HarvestStep(plant),
+            task_steps.MoveTo(storage.topleft),
+            task_steps.StoreStep(storage)
+            ]
+        super().__init__(title, steps, assignee)

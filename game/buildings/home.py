@@ -1,7 +1,7 @@
 from .building import Building
 
 class Home(Building):
-    sprite = ["frog"]
+    frames = ["storage"]
     graphic_layer = 1
 
     def __init__(self, GAME, pos):

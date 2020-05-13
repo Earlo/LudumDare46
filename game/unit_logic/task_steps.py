@@ -45,6 +45,16 @@ class HarvestStep(TaskStep):
         return True
 
 
+class StoreStep(TaskStep):
+    def __init__(self, storage, *args, **kwargs):
+        title = "Storing"
+        super().__init__(title)
+        self.storage = storage
+
+    def act(self, assignee, task):
+        self.storage.deliver_olive()
+        return True
+
 
 FARM = TaskStep("Do farming", [])
 GO_HOME = TaskStep("Go home", [])

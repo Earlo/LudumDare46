@@ -1,5 +1,5 @@
 class ExampleLevel:
-    background = "checker_dark"
+    background = "plains"
 
     def __init__(self, GAME):
         self.GAME = GAME

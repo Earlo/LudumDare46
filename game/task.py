@@ -1,10 +1,6 @@
-from .task_steps import TASK_COMPLETED
-
-
 class Task:
     def __init__(self, title, steps=[], assignee=None):
         self.title = title
-        self.completed = False
         self.steps = steps
         self.current_substep_index = 0
         self.assignee = assignee
@@ -19,8 +15,3 @@ class Task:
             if len(self.steps) == 0:
                 return True
         return False
-
-    def complete(self):
-        print("completed task!!!")
-        self.completed = True
-        return self.completed
